@@ -82,7 +82,7 @@ public class HttpClientDownloader extends AbstractDownloader {
             charset = site.getCharset();
             headers = site.getHeaders();
         } else {
-            acceptStatCode = Sets.newHashSet(200);
+            acceptStatCode = Sets.newHashSet(200); // 这里只有200表示成功
         }
         logger.info("downloading page {}", request.getUrl());
         CloseableHttpResponse httpResponse = null;
@@ -92,11 +92,11 @@ public class HttpClientDownloader extends AbstractDownloader {
             httpResponse = getHttpClient(site).execute(httpUriRequest);
             statusCode = httpResponse.getStatusLine().getStatusCode();
             request.putExtra(Request.STATUS_CODE, statusCode);
-            if (statusAccept(acceptStatCode, statusCode)) {
+            if (statusAccept(acceptStatCode, statusCode)) { //成功
                 Page page = handleResponse(request, charset, httpResponse, task);
                 onSuccess(request);
                 return page;
-            } else {
+            } else { //得到结果，但是状态码不是200的
                 logger.warn("code error " + statusCode + "\t" + request.getUrl());
                 return null;
             }
@@ -174,6 +174,7 @@ public class HttpClientDownloader extends AbstractDownloader {
         throw new IllegalArgumentException("Illegal HTTP Method " + method);
     }
 
+    // 包装成Page对象
     protected Page handleResponse(Request request, String charset, HttpResponse httpResponse, Task task) throws IOException {
         String content = getContent(charset, httpResponse);
         Page page = new Page();
@@ -199,6 +200,7 @@ public class HttpClientDownloader extends AbstractDownloader {
         }
     }
 
+   // 从页面上得到charset
     protected String getHtmlCharset(HttpResponse httpResponse, byte[] contentBytes) throws IOException {
         String charset;
         // charset

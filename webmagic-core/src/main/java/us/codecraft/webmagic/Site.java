@@ -26,7 +26,7 @@ public class Site {
 
     private Table<String, String, String> cookies = HashBasedTable.create();
 
-    private String charset;
+    private String charset; //字符编码
 
     /**
      * startUrls is the urls the crawler to start with.
@@ -43,9 +43,9 @@ public class Site {
 
     private static final Set<Integer> DEFAULT_STATUS_CODE_SET = new HashSet<Integer>();
 
-    private Set<Integer> acceptStatCode = DEFAULT_STATUS_CODE_SET;
+    private Set<Integer> acceptStatCode = DEFAULT_STATUS_CODE_SET; // 表示成功的状态编码集合
 
-    private Map<String, String> headers = new HashMap<String, String>();
+    private Map<String, String> headers = new HashMap<String, String>();  // headers信息
 
     private HttpHost httpProxy;
 

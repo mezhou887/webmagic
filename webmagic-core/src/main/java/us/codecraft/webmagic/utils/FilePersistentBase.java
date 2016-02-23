@@ -3,10 +3,9 @@ package us.codecraft.webmagic.utils;
 import java.io.File;
 
 /**
- * Base object of file persistence.
+ * 文件持久化的基类
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.2.0
  */
 public class FilePersistentBase {
 
@@ -33,6 +32,10 @@ public class FilePersistentBase {
         return new File(fullName);
     }
 
+    /**
+     * 如果目录不存在，则先创建目录
+     * @param fullName
+     */
     public void checkAndMakeParentDirecotry(String fullName) {
         int index = fullName.lastIndexOf(PATH_SEPERATOR);
         if (index > 0) {

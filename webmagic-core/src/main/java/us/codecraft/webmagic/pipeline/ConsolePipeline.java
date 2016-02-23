@@ -6,11 +6,9 @@ import us.codecraft.webmagic.Task;
 import java.util.Map;
 
 /**
- * Write results in console.<br>
- * Usually used in test.
+ * 处理结果集的一种方案，直接在控制台打印出结果集
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  */
 public class ConsolePipeline implements Pipeline {
 

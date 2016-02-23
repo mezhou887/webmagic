@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 public class HttpClientDownloaderTest {
 
     @Ignore
-    @Test
     public void testCookie() {
         Site site = Site.me().setDomain("www.diandian.com").addCookie("t", "43ztv9srfszl99yxv2aumx3zr7el7ybb");
         HttpClientDownloader httpClientDownloader = new HttpClientDownloader();

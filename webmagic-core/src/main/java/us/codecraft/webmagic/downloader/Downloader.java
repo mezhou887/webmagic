@@ -12,20 +12,29 @@ import us.codecraft.webmagic.Task;
  * @author code4crafter@gmail.com <br>
  * @since 0.1.0
  */
+
+/**
+ * # 页面下载器
+ * @author Administrator
+ *
+ */
 public interface Downloader {
 
-    /**
-     * Downloads web pages and store in Page object.
-     *
-     * @param request
-     * @param task
-     * @return page
-     */
+	/**
+	 * 根据Request请求去下载一个页面，然后将页面保存在Page对象中
+	 * @param request
+	 * @param task
+	 * @return page
+	 */
     public Page download(Request request, Task task);
 
     /**
      * Tell the downloader how many threads the spider used.
      * @param threadNum number of threads
+     */
+    /**
+     * 设置能给爬虫用于下载的线程数量
+     * @param threadNum
      */
     public void setThread(int threadNum);
 }

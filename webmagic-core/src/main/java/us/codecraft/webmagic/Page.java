@@ -40,7 +40,7 @@ public class Page {
 
     private int statusCode;
 
-    private boolean needCycleRetry;
+    private boolean needCycleRetry; //设置是否需要重试
 
     private List<Request> targetRequests = new ArrayList<Request>();
 

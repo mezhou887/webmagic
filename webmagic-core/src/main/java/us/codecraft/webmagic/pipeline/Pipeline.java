@@ -14,11 +14,10 @@ import us.codecraft.webmagic.Task;
  */
 public interface Pipeline {
 
-    /**
-     * Process extracted results.
-     *
-     * @param resultItems
-     * @param task
-     */
+	/**
+	 * 处理结果集
+	 * @param resultItems
+	 * @param task
+	 */
     public void process(ResultItems resultItems, Task task);
 }

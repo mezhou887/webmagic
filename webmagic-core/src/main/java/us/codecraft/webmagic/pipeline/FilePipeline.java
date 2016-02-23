@@ -16,10 +16,9 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
- * Store results in files.<br>
+ * 将处理结果写入到文件中
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  */
 @ThreadSafe
 public class FilePipeline extends FilePersistentBase implements Pipeline {
@@ -36,7 +35,10 @@ public class FilePipeline extends FilePersistentBase implements Pipeline {
     public FilePipeline(String path) {
         setPath(path);
     }
-
+    
+    /**
+     * 写入到html文件中，文件路径由task.getUUID()来确定
+     */
     @Override
     public void process(ResultItems resultItems, Task task) {
         String path = this.path + PATH_SEPERATOR + task.getUUID() + PATH_SEPERATOR;
