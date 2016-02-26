@@ -62,7 +62,7 @@ public class Spider implements Runnable, Task {
 
     protected Downloader downloader;
 
-    protected List<Pipeline> pipelines = new ArrayList<Pipeline>();
+    protected List<Pipeline> pipelines = new ArrayList<Pipeline>(); // 可以有多个进行处理
 
     protected PageProcessor pageProcessor;
 
@@ -276,12 +276,15 @@ public class Spider implements Runnable, Task {
         return this;
     }
 
+    /**
+     * 初始化组件
+     */
     protected void initComponent() {
         if (downloader == null) {
-            this.downloader = new HttpClientDownloader();
+            this.downloader = new HttpClientDownloader(); //这里初始化为系统默认的Downloader
         }
         if (pipelines.isEmpty()) {
-            pipelines.add(new ConsolePipeline());
+            pipelines.add(new ConsolePipeline()); // 如果没有指定的话, 将抓取到的结果输出到控制台
         }
         downloader.setThread(threadNum);
         if (threadPool == null || threadPool.isShutdown()) {
@@ -343,6 +346,7 @@ public class Spider implements Runnable, Task {
         }
     }
 
+    // 错误情况留给监听器进行处理
     protected void onError(Request request) {
         if (CollectionUtils.isNotEmpty(spiderListeners)) {
             for (SpiderListener spiderListener : spiderListeners) {
@@ -351,6 +355,7 @@ public class Spider implements Runnable, Task {
         }
     }
 
+    // 正确情况留给监听器进行处理
     protected void onSuccess(Request request) {
         if (CollectionUtils.isNotEmpty(spiderListeners)) {
             for (SpiderListener spiderListener : spiderListeners) {
@@ -370,7 +375,8 @@ public class Spider implements Runnable, Task {
             }
         }
     }
-
+    
+    // 回收资源
     public void close() {
         destroyEach(downloader);
         destroyEach(pageProcessor);
@@ -381,6 +387,7 @@ public class Spider implements Runnable, Task {
         threadPool.shutdown();
     }
 
+    // 具体回收资源
     private void destroyEach(Object object) {
         if (object instanceof Closeable) {
             try {

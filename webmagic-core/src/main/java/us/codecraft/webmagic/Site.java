@@ -33,9 +33,9 @@ public class Site {
      */
     private List<Request> startRequests = new ArrayList<Request>();
 
-    private int sleepTime = 5000;
+    private int sleepTime = 5000; // 设置抓取间隔
 
-    private int retryTimes = 0;
+    private int retryTimes = 0;  // 设置重试次数
 
     private int cycleRetryTimes = 0;
 
@@ -70,9 +70,8 @@ public class Site {
     }
 
     /**
-     * new a Site
-     *
-     * @return new site
+     * 这里实例化，生成一个新的对象
+     * @return
      */
     public static Site me() {
         return new Site();
@@ -267,11 +266,9 @@ public class Site {
     }
 
     /**
-     * Set the interval between the processing of two pages.<br>
-     * Time unit is micro seconds.<br>
-     *
-     * @param sleepTime sleepTime
-     * @return this
+     * 设置抓取间隔，单位是毫秒
+     * @param sleepTime
+     * @return
      */
     public Site setSleepTime(int sleepTime) {
         this.sleepTime = sleepTime;
@@ -315,10 +312,9 @@ public class Site {
     }
 
     /**
-     * Set retry times when download fail, 0 by default.<br>
-     *
-     * @param retryTimes retryTimes
-     * @return this
+     * 设置重试次数, 默认是0次
+     * @param retryTimes
+     * @return
      */
     public Site setRetryTimes(int retryTimes) {
         this.retryTimes = retryTimes;

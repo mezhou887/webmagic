@@ -23,7 +23,7 @@ public class OneFilePipeline extends FilePersistentBase implements Pipeline {
      * create a FilePipeline with default path"/data/webmagic/"
      */
     public OneFilePipeline() throws FileNotFoundException, UnsupportedEncodingException {
-        this("/data/webmagic/");
+        this(DEFAULT_STORE_PATH);
     }
 
     public OneFilePipeline(String path) throws FileNotFoundException, UnsupportedEncodingException {

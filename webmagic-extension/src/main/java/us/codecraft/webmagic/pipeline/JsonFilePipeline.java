@@ -13,26 +13,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Store results to files in JSON format.<br>
+ * 将结果集以json的形式保存到文件系统中
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.2.0
  */
 public class JsonFilePipeline extends FilePersistentBase implements Pipeline {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    /**
-     * new JsonFilePageModelPipeline with default path "/data/webmagic/"
-     */
     public JsonFilePipeline() {
-        setPath("/data/webmagic");
+        setPath(DEFAULT_STORE_PATH);
     }
 
     public JsonFilePipeline(String path) {
         setPath(path);
     }
 
+    
     @Override
     public void process(ResultItems resultItems, Task task) {
         String path = this.path + PATH_SEPERATOR + task.getUUID() + PATH_SEPERATOR;
@@ -41,7 +38,8 @@ public class JsonFilePipeline extends FilePersistentBase implements Pipeline {
             printWriter.write(JSON.toJSONString(resultItems.getAll()));
             printWriter.close();
         } catch (IOException e) {
-            logger.warn("write file error", e);
+        	e.printStackTrace();
+            logger.error("write file error", e);
         }
     }
 }

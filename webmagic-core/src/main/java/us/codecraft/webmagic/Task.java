@@ -10,11 +10,10 @@ package us.codecraft.webmagic;
  */
 public interface Task {
 
-    /**
-     * unique id for a task.
-     *
-     * @return uuid
-     */
+	/**
+	 * 唯一性标示一项任务的
+	 * @return
+	 */
     public String getUUID();
 
     /**

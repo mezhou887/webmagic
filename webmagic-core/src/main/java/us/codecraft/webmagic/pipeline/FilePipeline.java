@@ -16,21 +16,17 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
- * Store results in files.<br>
+ * 存储结果集到文件系统中
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  */
 @ThreadSafe
 public class FilePipeline extends FilePersistentBase implements Pipeline {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    /**
-     * create a FilePipeline with default path"/data/webmagic/"
-     */
     public FilePipeline() {
-        setPath("/data/webmagic/");
+        setPath(DEFAULT_STORE_PATH);
     }
 
     public FilePipeline(String path) {
@@ -56,7 +52,8 @@ public class FilePipeline extends FilePersistentBase implements Pipeline {
             }
             printWriter.close();
         } catch (IOException e) {
-            logger.warn("write file error", e);
+        	e.printStackTrace();
+            logger.error("write file error", e);
         }
     }
 }

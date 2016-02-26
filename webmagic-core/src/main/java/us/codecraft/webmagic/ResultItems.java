@@ -1,6 +1,5 @@
 package us.codecraft.webmagic;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class ResultItems {
 
     private Request request;
 
-    private boolean skip;
+    private boolean skip; //是否跳过, 如果为true, 表示Pipeline将不会处理
 
     public <T> T get(String key) {
         Object o = fields.get(key);

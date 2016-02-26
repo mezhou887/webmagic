@@ -8,10 +8,8 @@ import us.codecraft.webmagic.selector.Html;
 
 import java.util.List;
 
-/**
- * @author code4crafer@gmail.com
- */
 public class AmanzonPageProcessor implements PageProcessor{
+	
     public void process(Page page) {
 
         Html html = page.getHtml();

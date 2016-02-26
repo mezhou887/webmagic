@@ -5,15 +5,11 @@ import us.codecraft.webmagic.Task;
 
 import java.util.Map;
 
-/**
- * Write results in console.<br>
- * Usually used in test.
- *
- * @author code4crafter@gmail.com <br>
- * @since 0.1.0
- */
 public class ConsolePipeline implements Pipeline {
 
+	/**
+	 * 将抽取结果在控制台打印出来
+	 */
     @Override
     public void process(ResultItems resultItems, Task task) {
         System.out.println("get page: " + resultItems.getRequest().getUrl());
