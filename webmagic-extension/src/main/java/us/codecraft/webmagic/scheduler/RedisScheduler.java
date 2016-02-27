@@ -10,10 +10,9 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.scheduler.component.DuplicateRemover;
 
 /**
- * Use Redis as url scheduler for distributed crawlers.<br>
+ * 使用Redis保存抓取队列
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.2.0
  */
 public class RedisScheduler extends DuplicateRemovedScheduler implements MonitorableScheduler, DuplicateRemover {
 

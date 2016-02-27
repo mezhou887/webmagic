@@ -20,13 +20,13 @@ public class Site {
 
     private String domain;
 
-    private String userAgent;
+    private String userAgent; //User-Agent
 
     private Map<String, String> defaultCookies = new LinkedHashMap<String, String>();
 
     private Table<String, String, String> cookies = HashBasedTable.create();
 
-    private String charset;
+    private String charset;  //字符编码
 
     /**
      * startUrls is the urls the crawler to start with.
@@ -41,7 +41,7 @@ public class Site {
 
     private int retrySleepTime = 1000;
 
-    private int timeOut = 5000;
+    private int timeOut = 5000; //设置超时时间, 单位是毫秒
 
     private static final Set<Integer> DEFAULT_STATUS_CODE_SET = new HashSet<Integer>();
 
@@ -102,11 +102,11 @@ public class Site {
         return this;
     }
 
+
     /**
-     * set user agent
-     *
-     * @param userAgent userAgent
-     * @return this
+     * 设置User-Agent
+     * @param userAgent
+     * @return
      */
     public Site setUserAgent(String userAgent) {
         this.userAgent = userAgent;

@@ -9,10 +9,9 @@ import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * BloomFilterDuplicateRemover for huge number of urls.
+ * 使用BloomFilter来进行去重，占用内存较小，但是可能漏抓页面
+ * @author Administrator
  *
- * @author code4crafer@gmail.com
- * @since 0.5.1
  */
 public class BloomFilterDuplicateRemover implements DuplicateRemover {
 

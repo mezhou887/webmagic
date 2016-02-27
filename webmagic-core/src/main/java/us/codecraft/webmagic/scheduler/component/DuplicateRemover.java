@@ -9,14 +9,13 @@ import us.codecraft.webmagic.Task;
  * @since 0.5.1
  */
 public interface DuplicateRemover {
-    /**
-     *
-     * Check whether the request is duplicate.
-     *
-     * @param request request
-     * @param task task
-     * @return true if is duplicate
-     */
+
+	/**
+	 * 检查请求是否重复
+	 * @param request
+	 * @param task
+	 * @return
+	 */
     public boolean isDuplicate(Request request, Task task);
 
     /**

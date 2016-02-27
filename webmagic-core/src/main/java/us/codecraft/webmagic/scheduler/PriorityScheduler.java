@@ -11,10 +11,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
- * Priority scheduler. Request with higher priority will poll earlier. <br>
+ * 使用带有优先级的内存队列保存待抓取URL
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.2.1
  */
 @ThreadSafe
 public class PriorityScheduler extends DuplicateRemovedScheduler implements MonitorableScheduler {

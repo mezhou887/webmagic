@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author code4crafer@gmail.com
+ * 使用HashSet来进行去重，占用内存较大
+ * @author Administrator
+ *
  */
 public class HashSetDuplicateRemover implements DuplicateRemover {
 

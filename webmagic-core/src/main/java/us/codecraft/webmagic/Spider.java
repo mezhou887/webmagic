@@ -62,7 +62,7 @@ public class Spider implements Runnable, Task {
 
     protected Downloader downloader;
 
-    protected List<Pipeline> pipelines = new ArrayList<Pipeline>(); // 可以有多个进行处理
+    protected List<Pipeline> pipelines = new ArrayList<Pipeline>(); // 可以有多个pipline进行处理
 
     protected PageProcessor pageProcessor;
 
@@ -281,7 +281,7 @@ public class Spider implements Runnable, Task {
      */
     protected void initComponent() {
         if (downloader == null) {
-            this.downloader = new HttpClientDownloader(); //这里初始化为系统默认的Downloader
+            this.downloader = new HttpClientDownloader(); //这里初始化为系统默认的HttpClientDownloader
         }
         if (pipelines.isEmpty()) {
             pipelines.add(new ConsolePipeline()); // 如果没有指定的话, 将抓取到的结果输出到控制台

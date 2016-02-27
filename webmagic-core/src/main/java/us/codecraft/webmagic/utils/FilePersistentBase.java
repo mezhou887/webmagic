@@ -11,9 +11,11 @@ public class FilePersistentBase {
 
     protected String path;
 
-    public static String PATH_SEPERATOR = "/";
+    public static String PATH_SEPERATOR = "/"; //默认路径分割符号
     
-    public static String DEFAULT_STORE_PATH = "/data/webmagic";
+    public static String DEFAULT_STORE_PATH = "/data/webmagic"; //默认存储路径
+    
+    public static String DEFAULT_CHARSET="UTF-8"; //默认字符编码格式
 
     static {
         String property = System.getProperties().getProperty("file.separator");
@@ -25,6 +27,11 @@ public class FilePersistentBase {
         if (store_path != null) {
         	DEFAULT_STORE_PATH = store_path;
         }
+       
+        String charset = System.getProperties().getProperty("charset");
+        if (charset != null) {
+        	DEFAULT_CHARSET = charset;
+        }        
     }
     
     /**

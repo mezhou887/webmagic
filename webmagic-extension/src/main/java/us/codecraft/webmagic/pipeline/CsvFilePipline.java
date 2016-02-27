@@ -27,6 +27,7 @@ public class CsvFilePipline extends FilePersistentBase implements Pipeline {
 	@Override
 	public void process(ResultItems resultItems, Task task) {
         String path = this.path + PATH_SEPERATOR + task.getUUID() + PATH_SEPERATOR;		
+        
 	}
 
 }

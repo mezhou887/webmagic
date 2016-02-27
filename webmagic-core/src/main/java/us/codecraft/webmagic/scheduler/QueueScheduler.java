@@ -7,17 +7,15 @@ import us.codecraft.webmagic.Task;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-
 /**
- * Basic Scheduler implementation.<br>
- * Store urls to fetch in LinkedBlockingQueue and remove duplicate urls by HashMap.
+ * 使用内存队列保存待抓取URL，去重操作由HashMap来完成
+ * @author Administrator
  *
- * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  */
 @ThreadSafe
 public class QueueScheduler extends DuplicateRemovedScheduler implements MonitorableScheduler {
 
+	// 线程阻塞-安全的先进先出队列
     private BlockingQueue<Request> queue = new LinkedBlockingQueue<Request>();
 
     @Override
