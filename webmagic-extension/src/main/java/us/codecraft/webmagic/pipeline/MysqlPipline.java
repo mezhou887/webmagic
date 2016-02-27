@@ -1,18 +1,32 @@
 package us.codecraft.webmagic.pipeline;
 
-import us.codecraft.webmagic.ResultItems;
-import us.codecraft.webmagic.Task;
+import us.codecraft.webmagic.utils.RelationalDBPersistentBase;
 
 /**
  * 将结果集保存到Mysql数据库中
  * @author Administrator
  *
  */
-public class MysqlPipline implements Pipeline {
+public class MysqlPipline extends RelationalDBPersistentBase {
 
-	@Override
-	public void process(ResultItems resultItems, Task task) {
-		
-	}
+    private static final String driver = "com.mysql.jdbc.Driver";
+    public static String USER = "root";
+    public static String PASSWORD ="Admin1234#"; 
+
+    static {
+        String mysql_user = System.getProperties().getProperty("mysql.user");
+        if (mysql_user != null) {
+        	USER = mysql_user;
+        }
+        
+        String mysql_pwd = System.getProperties().getProperty("mysql.password");
+        if (mysql_pwd != null) {
+        	PASSWORD = mysql_pwd;
+        }
+    }    
+	
+    public MysqlPipline(String connStr, String query) {
+    	initComponent(driver, connStr, USER, PASSWORD, query);
+    }	
 
 }
