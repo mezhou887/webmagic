@@ -42,7 +42,7 @@ public class RelationalDBPersistentBase  implements Pipeline {
 		try {
 			NamedParameterStatement pst = new NamedParameterStatement(conn, query);
 			for(Map.Entry<String, Object> entry: resultItems.getAll().entrySet()) {
-				pst.setObject(entry.getValue().toString(), entry.getValue());
+				pst.setObject(entry.getKey(), entry.getValue().toString());
 			}
 			pst.executeUpdate();
 			pst.close();

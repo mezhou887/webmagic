@@ -39,7 +39,7 @@ public class JsonFilePipeline extends FilePersistentBase implements Pipeline {
             printWriter.close();
         } catch (IOException e) {
         	e.printStackTrace();
-            logger.error("write file error", e);
+            logger.error("write json error", e);
         }
     }
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.CsvFilePipline;
+import us.codecraft.webmagic.pipeline.FilePipeline;
+import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.pipeline.MysqlPipline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
@@ -51,11 +54,14 @@ public class ZhihuPageProcessor implements PageProcessor {
     }
     
     public static void main(String[] args) throws Exception { 
-    	String query = "insert into questions(url,question,username,userid,vote) values(:url, :question, :username, :userid, :vote)";
+    	String query = "insert into questions(url, question, username, userid, vote, dealdate) values(:url, :question, :username, :userid, :vote, now())";
     	String connStr = "jdbc:mysql://localhost/zhihu";
     	
         Spider.create(new ZhihuPageProcessor()).addUrl("http://www.zhihu.com/search?type=question&q=≈¿≥Ê")
         .setScheduler(new QueueScheduler())
+//        .addPipeline(new JsonFilePipeline("D:\\webmagic\\"))
+//        .addPipeline(new FilePipeline("D:\\webmagic\\"))
+        .addPipeline(new CsvFilePipline("D:\\webmagic\\"))
         .addPipeline(new MysqlPipline(connStr, query)).thread(5).run();
     }
 
