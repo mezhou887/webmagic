@@ -62,7 +62,7 @@ public class ZhihuPageProcessor implements PageProcessor {
 //        .addPipeline(new JsonFilePipeline("D:\\webmagic\\"))
 //        .addPipeline(new FilePipeline("D:\\webmagic\\"))
         .addPipeline(new CsvFilePipline("D:\\webmagic\\"))
-        .addPipeline(new MysqlPipline(connStr, query)).thread(5).run();
+        .addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
     }
 
 }
