@@ -1,4 +1,4 @@
-package com.mezhou887.quartz.test;
+package com.mezhou887.test.quartz.schedule;
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ public class MyTestSchedule {
     private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public void printSomething(){
+	    System.out.println("this is my test schedule date:" + new Date().toString());
 	    logger.info("this is my test schedule date:" + new Date().toString());
 	  }
 
