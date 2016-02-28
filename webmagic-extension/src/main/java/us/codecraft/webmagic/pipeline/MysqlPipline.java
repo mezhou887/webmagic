@@ -10,7 +10,7 @@ import us.codecraft.webmagic.utils.RelationalDBPersistentBase;
 public class MysqlPipline extends RelationalDBPersistentBase {
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    public static String USER = "root";
+    public static String USER = "mezhou887";
     public static String PASSWORD ="Admin1234#"; 
 
     static {
