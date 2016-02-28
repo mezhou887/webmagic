@@ -25,8 +25,8 @@ public class OraclePipline extends RelationalDBPersistentBase {
         }
     }    
 
-    public OraclePipline(String connStr, String query) {
-    	initComponent(driver, connStr, USER, PASSWORD, query);
+    public OraclePipline(String connStr, String sql) {
+    	initComponent(driver, connStr, USER, PASSWORD, sql);
     }
 
 }
