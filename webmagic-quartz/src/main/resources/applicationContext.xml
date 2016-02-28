@@ -8,27 +8,22 @@
     <property name="triggers">
       <list>
          <!-- 所有的调度列表-->
-        <ref bean="myTestTrigger" />
+        <ref bean="zhihuTrigger" />
       </list>
     </property>
   </bean>
 
-  <!--配置调度执行的触发的时间-->
-  <bean id="myTestTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-    <property name="jobDetail" ref="myTestDetail" />
+  <!-- Zhihu -->
+  <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <!-- 每天早上8点执行任务调度 -->
-      <value>0 0/1 * * * ?</value>
+      <value>0 0 23 * * ?</value>
     </property>
   </bean>
-  
-  <!--配置调度具体执行的方法-->
-  <bean id="myTestDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-    <property name="targetObject" ref="myTestSchedule" />
-    <property name="targetMethod" value="printSomething" />
+  <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="zhihuSchedule" />
+    <property name="targetMethod" value="exec" />
   </bean>
-  
-  <!-- 添加调度的任务bean 配置对应的class-->
-  <bean id="myTestSchedule" class="com.mezhou887.test.quartz.schedule.MyTestSchedule" />
+  <bean id="zhihuSchedule" class="com.mezhou887.quartz.schedule.ZhihuPageProcessor" />
 
 </beans>

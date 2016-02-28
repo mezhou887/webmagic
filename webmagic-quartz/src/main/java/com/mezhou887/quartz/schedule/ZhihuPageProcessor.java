@@ -1,19 +1,16 @@
-package com.mezhou887.trial;
+package com.mezhou887.quartz.schedule;
 
 import java.util.List;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.CsvFilePipline;
-import us.codecraft.webmagic.pipeline.FilePipeline;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.pipeline.MysqlPipline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.selector.Html;
 
-public class ZhihuPageProcessor implements PageProcessor {
+public class ZhihuPageProcessor implements PageProcessor,  Schedule {
     
     private Site site = Site.me().setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(500).setTimeOut(3 * 60 * 1000)
             .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0")
@@ -23,7 +20,6 @@ public class ZhihuPageProcessor implements PageProcessor {
     
 	 private static final int voteNum = 100;
 	    
-	@Override
 	public void process(Page page) {
         List<String> relativeUrl = page.getHtml().xpath("//li[@class='item clearfix']/div/a/@href").all(); 
         page.addTargetRequests(relativeUrl);
@@ -48,18 +44,22 @@ public class ZhihuPageProcessor implements PageProcessor {
         }		
 	}
 
-    @Override
     public Site getSite() {
         return site;
     }
-    
-    public static void main(String[] args) throws Exception { 
-    	String query = "insert into questions(url, question, username, userid, vote, dealdate) values(:url, :question, :username, :userid, :vote, now())";
+
+	public void exec() {
+	   	String query = "insert into questions(url, question, username, userid, vote, dealdate) values(:url, :question, :username, :userid, :vote, now())";
     	String connStr = "jdbc:mysql://localhost/zhihu";
+    	String startUrl = "http://www.zhihu.com/search?type=question&q=爬虫";
     	
-        Spider.create(new ZhihuPageProcessor()).addUrl("http://www.zhihu.com/search?type=question&q=爬虫")
-        .setScheduler(new QueueScheduler())
-        .addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
-    }
+    	Spider.create(new ZhihuPageProcessor()).addUrl(startUrl)
+    			 .setScheduler(new QueueScheduler())
+    			 .addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
+	}
+	
+	public static void main(String[] args) {
+		new ZhihuPageProcessor().exec();
+	}
 
 }
