@@ -17,7 +17,7 @@
   <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <value>0 0 23 * * ?</value>
+      <value>0 59 23 * * ?</value>
     </property>
   </bean>
   <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
