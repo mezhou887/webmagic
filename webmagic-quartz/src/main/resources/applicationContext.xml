@@ -8,16 +8,30 @@
     <property name="triggers">
       <list>
          <!-- 所有的调度列表-->
+        <ref bean="myTestTrigger" />
         <ref bean="zhihuTrigger" />
       </list>
     </property>
   </bean>
 
-  <!-- Zhihu -->
+  <bean id="myTestTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="myTestDetail" />
+    <property name="cronExpression">
+      <!-- 每天早上8点执行任务调度 -->
+      <value>0 0/1 * * * ?</value>
+    </property>
+  </bean>
+  <bean id="myTestDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="myTestSchedule" />
+    <property name="targetMethod" value="printSomething" />
+  </bean>
+  <bean id="myTestSchedule" class="com.mezhou887.test.quartz.schedule.MyTestSchedule" />
+
   <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <value>0 59 23 * * ?</value>
+      <!-- 每天早上8点执行任务调度 -->
+      <value>0 0/1 * * * ?</value>
     </property>
   </bean>
   <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

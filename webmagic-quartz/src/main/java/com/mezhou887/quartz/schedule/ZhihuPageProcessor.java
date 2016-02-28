@@ -1,7 +1,11 @@
 package com.mezhou887.quartz.schedule;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -12,6 +16,8 @@ import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.selector.Html;
 
 public class ZhihuPageProcessor implements PageProcessor {
+	
+    private Logger logger = LoggerFactory.getLogger(getClass());
     
     private Site site = Site.me().setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(500).setTimeOut(3 * 60 * 1000)
             .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0")
@@ -23,9 +29,9 @@ public class ZhihuPageProcessor implements PageProcessor {
 	    
 	public void process(Page page) {
         List<String> relativeUrl = page.getHtml().xpath("//li[@class='item clearfix']/div/a/@href").all(); 
-        page.addTargetRequests(filterUrl(relativeUrl));
+        page.addTargetRequests(relativeUrl);
         relativeUrl = page.getHtml().xpath("//div[@id='zh-question-related-questions']//a[@class='question_link']/@href").all(); 
-        page.addTargetRequests(filterUrl(relativeUrl));
+        page.addTargetRequests(relativeUrl);
         
         List<String> answers =  page.getHtml().xpath("//div[@id='zh-question-answer-wrap']/div").all(); 
         boolean exist = false;
@@ -47,16 +53,6 @@ public class ZhihuPageProcessor implements PageProcessor {
 
     public Site getSite() {
         return site;
-    }
-    
-    public List<String> filterUrl(List<String> relativeUrl) {
-    	List<String> filterUrl = new ArrayList<String>();
-    	for(String url: relativeUrl) {
-    		if(url.substring(30).contains("2")) {
-    			filterUrl.add(url);
-    		}
-    	}
-    	return filterUrl;
     }
 
 	public void exec() {
