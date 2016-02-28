@@ -25,8 +25,8 @@ public class MysqlPipline extends RelationalDBPersistentBase {
         }
     }    
 	
-    public MysqlPipline(String connStr, String query) {
-    	initComponent(driver, connStr, USER, PASSWORD, query);
+    public MysqlPipline(String connStr, String sql) {
+    	initComponent(driver, connStr, USER, PASSWORD, sql);
     }	
 
 }

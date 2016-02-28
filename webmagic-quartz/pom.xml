@@ -11,10 +11,9 @@
 		<artifactId>quartz</artifactId>
 		<version>2.2.2</version>
 	</dependency>
-
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-core</artifactId>
+		<artifactId>spring-context-support</artifactId>
 		<version>4.2.5.RELEASE</version>
 	</dependency>
 	<dependency>
@@ -24,21 +23,89 @@
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-context-support</artifactId>
+		<artifactId>spring-jdbc</artifactId>
 		<version>4.2.5.RELEASE</version>
 	</dependency>
-
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>4.2.5.RELEASE</version>
+	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-tx</artifactId>
 		<version>4.2.5.RELEASE</version>
 	</dependency>
-
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>4.2.5.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>3.3.2</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2</version>
+	</dependency>	
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.10</version>
+	</dependency>
 	<dependency>
 		<groupId>log4j</groupId>
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
-	</dependency>	
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>4.2.4.Final</version>
+		<exclusions>
+			<exclusion>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.jboss.spec.javax.transaction</groupId>
+				<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>4.2.4.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-ehcache</artifactId>
+		<version>4.2.4.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-c3p0</artifactId>
+		<version>4.2.4.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.38</version>
+	</dependency>
+	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>			
         
   </dependencies>
 </project>

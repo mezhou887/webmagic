@@ -21,10 +21,10 @@ public class RelationalDBPersistentBase  implements Pipeline {
 	
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Connection conn = null;
-    private String query;
+    private String sql;
     
-    public void initComponent(String driver, String connStr, String user, String password, String query) {
-    	this.query = query;
+    public void initComponent(String driver, String connStr, String user, String password, String sql) {
+    	this.sql = sql;
     	try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(connStr, user, password);
@@ -40,7 +40,7 @@ public class RelationalDBPersistentBase  implements Pipeline {
 	@Override
 	public void process(ResultItems resultItems, Task task) {
 		try {
-			NamedParameterStatement pst = new NamedParameterStatement(conn, query);
+			NamedParameterStatement pst = new NamedParameterStatement(conn, sql);
 			for(Map.Entry<String, Object> entry: resultItems.getAll().entrySet()) {
 				pst.setObject(entry.getKey(), entry.getValue().toString());
 			}
