@@ -1,10 +1,6 @@
 package com.mezhou887.quartz.schedule;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.apache.log4j.Logger;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -16,8 +12,6 @@ import us.codecraft.webmagic.selector.Html;
 
 public class ZhihuPageProcessor implements PageProcessor {
 	
-    private Logger logger = Logger.getLogger(getClass());
-    
     private Site site = Site.me().setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(500).setTimeOut(3 * 60 * 1000)
             .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0")
             .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
