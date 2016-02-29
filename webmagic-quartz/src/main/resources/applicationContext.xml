@@ -10,6 +10,7 @@
          <!-- 所有的调度列表-->
         <ref bean="oneMinuteTrigger" />
         <ref bean="oneHourTrigger" />
+        <ref bean="zhihuTrigger" />
       </list>
     </property>
   </bean>
@@ -39,5 +40,18 @@
     <property name="targetMethod" value="exec" />
   </bean>
   <bean id="oneHourSchedule" class="com.mezhou887.test.quartz.schedule.OneHourSchedule" />
+  
+  <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="zhihuDetail" />
+    <property name="cronExpression">
+      <!-- 每分钟执行一次 -->
+      <value>0 0/1 * * * ?</value>
+    </property>
+  </bean>
+  <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="zhihuSchedule" />
+    <property name="targetMethod" value="exec" />
+  </bean>
+  <bean id="zhihuSchedule" class="com.mezhou887.quartz.schedule.ZhihuPageProcessor" />  
 
 </beans>
