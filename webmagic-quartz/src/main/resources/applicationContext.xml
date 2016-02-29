@@ -8,36 +8,36 @@
     <property name="triggers">
       <list>
          <!-- 所有的调度列表-->
-        <ref bean="myTestTrigger" />
-        <ref bean="zhihuTrigger" />
+        <ref bean="oneMinuteTrigger" />
+        <ref bean="oneHourTrigger" />
       </list>
     </property>
   </bean>
 
-  <bean id="myTestTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-    <property name="jobDetail" ref="myTestDetail" />
+  <bean id="oneMinuteTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="oneMinuteDetail" />
     <property name="cronExpression">
-      <!-- 每天早上8点执行任务调度 -->
+      <!-- 每分钟执行一次 -->
       <value>0 0/1 * * * ?</value>
     </property>
   </bean>
-  <bean id="myTestDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-    <property name="targetObject" ref="myTestSchedule" />
-    <property name="targetMethod" value="printSomething" />
-  </bean>
-  <bean id="myTestSchedule" class="com.mezhou887.test.quartz.schedule.MyTestSchedule" />
-
-  <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-    <property name="jobDetail" ref="zhihuDetail" />
-    <property name="cronExpression">
-      <!-- 每天早上8点执行任务调度 -->
-      <value>0 0/1 * * * ?</value>
-    </property>
-  </bean>
-  <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-    <property name="targetObject" ref="zhihuSchedule" />
+  <bean id="oneMinuteDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="oneMinuteSchedule" />
     <property name="targetMethod" value="exec" />
   </bean>
-  <bean id="zhihuSchedule" class="com.mezhou887.quartz.schedule.ZhihuPageProcessor" />
+  <bean id="oneMinuteSchedule" class="com.mezhou887.test.quartz.schedule.OneMinuteSchedule" />
+
+  <bean id="oneHourTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="oneHourDetail" />
+    <property name="cronExpression">
+      <!-- 每小时执行一次 -->
+      <value>0 0 0/1 * * ?</value>
+    </property>
+  </bean>
+  <bean id="oneHourDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="oneHourSchedule" />
+    <property name="targetMethod" value="exec" />
+  </bean>
+  <bean id="oneHourSchedule" class="com.mezhou887.test.quartz.schedule.OneHourSchedule" />
 
 </beans>

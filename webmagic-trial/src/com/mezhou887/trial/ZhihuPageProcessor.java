@@ -57,7 +57,7 @@ public class ZhihuPageProcessor implements PageProcessor {
     	String query = "insert into questions(url, question, username, userid, vote, dealdate) values(:url, :question, :username, :userid, :vote, now())";
     	String connStr = "jdbc:mysql://localhost/zhihu";
     	
-        Spider.create(new ZhihuPageProcessor()).addUrl("http://www.zhihu.com/search?type=question&q=爬虫")
+        Spider.create(new ZhihuPageProcessor()).addUrl("http://www.zhihu.com/search?type=question&q=dba")
         .setScheduler(new QueueScheduler())
         .addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
     }
