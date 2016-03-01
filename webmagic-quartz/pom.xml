@@ -62,6 +62,13 @@
             <version>0.5.3</version>  
             <scope>compile</scope>  
         </dependency>
+        
+        <!-- druid -->
+        <dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.17</version>
+		</dependency>
 
 	</dependencies>
 </project>

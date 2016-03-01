@@ -11,14 +11,15 @@
         <ref bean="oneMinuteTrigger" />
         <ref bean="oneHourTrigger" />
         <!-- <ref bean="zhihuTrigger" />   -->
+        <!-- <ref bean="backupDBTrigger" />  -->
       </list>
     </property>
   </bean>
 
+  <!-- 测试每分钟执行一次 -->
   <bean id="oneMinuteTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="oneMinuteDetail" />
     <property name="cronExpression">
-      <!-- 每分钟执行一次 -->
       <value>0 0/1 * * * ?</value>
     </property>
   </bean>
@@ -28,10 +29,10 @@
   </bean>
   <bean id="oneMinuteSchedule" class="com.mezhou887.test.quartz.schedule.OneMinuteSchedule" />
 
+  <!-- 测试每小时执行一次 -->
   <bean id="oneHourTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="oneHourDetail" />
     <property name="cronExpression">
-      <!-- 每小时执行一次 -->
       <value>0 0 0/1 * * ?</value>
     </property>
   </bean>
@@ -41,11 +42,11 @@
   </bean>
   <bean id="oneHourSchedule" class="com.mezhou887.test.quartz.schedule.OneHourSchedule" />
   
+  <!-- 测试爬取知乎页面，每两小时执行一次 -->
   <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <!-- 每分钟执行一次 -->
-      <value>0 0/1 * * * ?</value>
+      <value>0 0 0/2 * * ?</value>
     </property>
   </bean>
   <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -54,4 +55,17 @@
   </bean>
   <bean id="zhihuSchedule" class="com.mezhou887.quartz.schedule.ZhihuPageProcessor" />  
 
+  <!-- 测试备份数据库功能，每天0点执行一次 -->
+  <bean id="backupDBTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <property name="jobDetail" ref="backupDBDetail" />
+    <property name="cronExpression">
+      <value>0 0 * * * ?</value>
+      <!-- <value>0 0 0 * * ?</value>   -->
+    </property>
+  </bean>
+  <bean id="backupDBDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="backupDBSchedule" />
+    <property name="targetMethod" value="exec" />
+  </bean>
+  <bean id="backupDBSchedule" class="com.mezhou887.quartz.schedule.BackupDBProcessor" />  
 </beans>
