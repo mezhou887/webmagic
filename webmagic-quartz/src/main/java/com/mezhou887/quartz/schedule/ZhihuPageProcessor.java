@@ -42,6 +42,7 @@ public class ZhihuPageProcessor implements PageProcessor {
                 page.putField("question", page.getHtml().xpath("//div[@id='zh-question-title']//h2/text()").toString());
                 page.putField("userid", new Html(answer).xpath("//a[@class='author-link']/@href"));
                 page.putField("username", new Html(answer).xpath("//a[@class='author-link']/text()"));
+                page.putField("answer", new Html(answer).xpath("//div[@id='zh-question-answer-wrap']/div//div[@class='zh-summary summary clearfix']/text()"));
                 exist = true;
             }
         }
@@ -58,8 +59,8 @@ public class ZhihuPageProcessor implements PageProcessor {
 		
 		logger.info("start zhihu:" + new Date().toString());
 		
-	   	String query = "insert into questions(url, question, username, userid, vote, dealdate) values(:url, :question, :username, :userid, :vote, now())";
-    	String connStr = "jdbc:mysql://localhost/zhihu";
+	   	String query = "insert into questions(url, question, username, userid, vote, answer, dealdate) values(:url, :question, :username, :userid, :vote, :answer, now())";
+    	String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
     	String startUrl = "http://www.zhihu.com/search?type=question&q=oracle";
     	
     	Spider.create(new ZhihuPageProcessor()).addUrl(startUrl)

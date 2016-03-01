@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+  					  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+  <!-- 加载配置属性文件 -->
+  <context:property-placeholder ignore-unresolvable="true" location="classpath:webmagic-quartz.properties" />
 
   <!-- quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 -->
   <bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -10,8 +14,8 @@
          <!-- 所有的调度列表-->
         <ref bean="oneMinuteTrigger" />
         <ref bean="oneHourTrigger" />
-        <!-- <ref bean="zhihuTrigger" />   -->
-        <!-- <ref bean="backupDBTrigger" />  -->
+        <ref bean="zhihuTrigger" />
+        <ref bean="backupDBTrigger" />
       </list>
     </property>
   </bean>
@@ -46,7 +50,7 @@
   <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <value>0 0 0/2 * * ?</value>
+      <value>0 50 0/2 * * ?</value>
     </property>
   </bean>
   <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -59,7 +63,7 @@
   <bean id="backupDBTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="backupDBDetail" />
     <property name="cronExpression">
-      <value>0 0 * * * ?</value>
+      <value>0 0 0/1 * * ?</value>
       <!-- <value>0 0 0 * * ?</value>   -->
     </property>
   </bean>
@@ -67,5 +71,10 @@
     <property name="targetObject" ref="backupDBSchedule" />
     <property name="targetMethod" value="exec" />
   </bean>
-  <bean id="backupDBSchedule" class="com.mezhou887.quartz.schedule.BackupDBProcessor" />  
+  <bean id="backupDBSchedule" class="com.mezhou887.quartz.schedule.BackupDBProcessor">
+    <property name="schema" value="${jdbc.schema}" />
+    <property name="user" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+    <property name="basePath" value="E://Crawler//data//" />
+  </bean>  
 </beans>
