@@ -14,7 +14,7 @@ public interface DuplicateRemover {
 	 * 检查请求是否重复
 	 * @param request
 	 * @param task
-	 * @return
+	 * @return boolean
 	 */
     public boolean isDuplicate(Request request, Task task);
 

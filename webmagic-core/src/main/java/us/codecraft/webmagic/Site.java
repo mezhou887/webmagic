@@ -71,7 +71,7 @@ public class Site {
 
     /**
      * 这里实例化，生成一个新的对象
-     * @return
+     * @return this
      */
     public static Site me() {
         return new Site();
@@ -106,7 +106,7 @@ public class Site {
     /**
      * 设置User-Agent
      * @param userAgent
-     * @return
+     * @return this
      */
     public Site setUserAgent(String userAgent) {
         this.userAgent = userAgent;
@@ -242,7 +242,6 @@ public class Site {
      * @param startUrl startUrl
      * @return this
      * @see Spider#addUrl(String...)
-     * @deprecated
      */
     public Site addStartUrl(String startUrl) {
         return addStartRequest(new Request(startUrl));
@@ -268,7 +267,7 @@ public class Site {
     /**
      * 设置抓取间隔，单位是毫秒
      * @param sleepTime
-     * @return
+     * @return this
      */
     public Site setSleepTime(int sleepTime) {
         this.sleepTime = sleepTime;
@@ -314,7 +313,7 @@ public class Site {
     /**
      * 设置重试次数, 默认是0次
      * @param retryTimes
-     * @return
+     * @return this
      */
     public Site setRetryTimes(int retryTimes) {
         this.retryTimes = retryTimes;

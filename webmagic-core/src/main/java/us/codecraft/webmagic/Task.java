@@ -12,7 +12,7 @@ public interface Task {
 
 	/**
 	 * 唯一性标示一项任务的
-	 * @return
+	 * @return uuid
 	 */
     public String getUUID();
 

@@ -3,75 +3,65 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mezhou887.quartz</groupId>
 	<artifactId>webmagic-quartz</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.5.3</version>
 	<packaging>war</packaging>
+	<properties>
+		<spring.version>4.2.5.RELEASE</spring.version>  
+	</properties>
 
 	<dependencies>
+		<!--  scheduler -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
-        </dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.7</version>
-		</dependency>	
+		
+		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>${spring.version}</version> 
 		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-	
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.35</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>15.0</version>
-		</dependency>
+		
+		<!-- webmagic -->
+		<dependency>  
+            <groupId>us.codecraft</groupId>  
+            <artifactId>webmagic-core</artifactId>  
+            <version>0.5.3</version>  
+            <scope>compile</scope>  
+        </dependency>
+		<dependency>  
+            <groupId>us.codecraft</groupId>  
+            <artifactId>webmagic-extension</artifactId>  
+            <version>0.5.3</version>  
+            <scope>compile</scope>  
+        </dependency>
 
 	</dependencies>
 </project>

@@ -90,7 +90,6 @@ public class Page {
 
     /**
      * @param html html
-     * @deprecated since 0.4.0
      * The html is parse just when first time of calling {@link #getHtml()}, so use {@link #setRawText(String)} instead.
      */
     public void setHtml(Html html) {

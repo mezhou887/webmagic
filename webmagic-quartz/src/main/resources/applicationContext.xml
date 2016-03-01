@@ -10,7 +10,7 @@
          <!-- 所有的调度列表-->
         <ref bean="oneMinuteTrigger" />
         <ref bean="oneHourTrigger" />
-        <ref bean="zhihuTrigger" />
+        <!-- <ref bean="zhihuTrigger" />   -->
       </list>
     </property>
   </bean>
