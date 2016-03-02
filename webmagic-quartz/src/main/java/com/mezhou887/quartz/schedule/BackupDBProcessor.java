@@ -21,7 +21,6 @@ public class BackupDBProcessor {
 	private String password;
 	
 	private String basePath;
-
 	
 	public void exec() {
 		
@@ -60,32 +59,16 @@ public class BackupDBProcessor {
         }
     }
 
-	public String getSchema() {
-		return schema;
-	}
-
 	public void setSchema(String schema) {
 		this.schema = schema;
-	}
-
-	public String getUser() {
-		return user;
 	}
 
 	public void setUser(String user) {
 		this.user = user;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getBasePath() {
-		return basePath;
 	}
 
 	public void setBasePath(String basePath) {
