@@ -50,7 +50,7 @@
   <bean id="zhihuTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="zhihuDetail" />
     <property name="cronExpression">
-      <value>0 50 0/2 * * ?</value>
+      <value>0 15 0/2 * * ?</value>
     </property>
   </bean>
   <bean id="zhihuDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
