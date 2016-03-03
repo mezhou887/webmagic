@@ -25,7 +25,7 @@ public class BackupDBProcessor {
 	public void exec() {
 		
 		Date currentDate = new Date();
-		String path = setPath(basePath) + setPath(new SimpleDateFormat("yyyyMM").format(currentDate));
+		String path = setPath(basePath) + setPath(new SimpleDateFormat("yyyyMMdd").format(currentDate));
 		checkAndMakeParentDirecotry(path);
 		String filePath = path + schema +"_"+ new SimpleDateFormat("yyyyMMddHHmmss").format(currentDate) + ".dump";
 		

@@ -11,11 +11,17 @@
   <bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
-         <!-- 所有的调度列表-->
+		<!-- 每分钟执行一次的范例 -->
         <ref bean="oneMinuteTrigger" />
+		<!-- 每小时执行一次的范例 -->
         <ref bean="oneHourTrigger" />
-        <ref bean="zhihuTrigger" />
+        <!-- 爬取知乎 -->
+        <!-- <ref bean="zhihuTrigger" /> -->
+        <!-- 备份数据库 -->
         <ref bean="backupDBTrigger" />
+       	<!-- 压缩数据库 -->
+       	
+       	<!-- 定时发邮件 -->
       </list>
     </property>
   </bean>
@@ -63,8 +69,7 @@
   <bean id="backupDBTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="backupDBDetail" />
     <property name="cronExpression">
-      <value>0 0 0/1 * * ?</value>
-      <!-- <value>0 0 0 * * ?</value>   -->
+    	<value>0 0 0 * * ?</value>
     </property>
   </bean>
   <bean id="backupDBDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

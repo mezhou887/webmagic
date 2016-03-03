@@ -6,9 +6,6 @@
 	
 	<description>Spring Configuration</description>
 	
-	<context:annotation-config />
-	<context:component-scan base-package="com.mezhou887.quartz.schedule" />
-	
 	<!-- 加载配置属性文件 -->
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:webmagic-quartz.properties" />
 	

@@ -17,16 +17,3 @@ call mvn test
 call mvn package
 call mvn install
 call mvn cobertura:cobertura
-cd E:\webmagic\webmagic-samples
-call mvn clean
-call mvn test
-call mvn package
-call mvn install
-call mvn cobertura:cobertura
-cd E:\webmagic\webmagic-trial
-call mvn clean
-call mvn test
-call mvn package
-call mvn install
-call mvn cobertura:cobertura
-pause

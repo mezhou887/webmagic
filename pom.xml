@@ -57,6 +57,7 @@
         <module>webmagic-samples</module>
         <module>webmagic-avalon</module>
         <module>webmagic-trial</module>
+        <module>webmagic-quartz</module>
     </modules>
 
     <dependencyManagement>
