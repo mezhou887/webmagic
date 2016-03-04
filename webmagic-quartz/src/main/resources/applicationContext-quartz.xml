@@ -4,8 +4,8 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
   					  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-  <!-- 加载配置属性文件 -->
-  <context:property-placeholder ignore-unresolvable="true" location="classpath:webmagic-quartz.properties" />
+  <!-- 加载配置属性文件 需要处理掉TODO-->
+  <context:property-placeholder location="classpath:webmagic-quartz.properties" />
 
   <!-- quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 -->
   <bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -24,8 +24,8 @@
        	<!-- 定时发邮件 -->
       </list>
     </property>
-  </bean>
-
+  </bean>  
+      
   <!-- 测试每分钟执行一次 -->
   <bean id="oneMinuteTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
     <property name="jobDetail" ref="oneMinuteDetail" />

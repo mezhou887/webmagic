@@ -22,10 +22,11 @@
         <property name="to" value="mezhou887@foxmail.com" />
         <property name="subject" value="爬虫运行状态" />
     </bean>
-    
+
+<!--     
     <bean id="simpleMail" class="com.mezhou887.quartz.schedule.MailProcessor">
         <property name="mailSender" ref="mailSender" />
         <property name="simpleMailMessage" ref="simpleMailMessage" />
     </bean>
-    
+ -->    
 </beans>
