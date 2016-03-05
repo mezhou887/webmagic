@@ -1,0 +1,94 @@
+#set($ctx=$request.contextPath)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/ico" href="$ctx/static/images/favicon.ico">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<title>任务状态</title>
+	<link rel="stylesheet" type="text/css" href="$ctx/static/css/jquery.dataTables.min.css">
+	<script type="text/javascript" language="javascript" src="$ctx/static/js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" language="javascript" src="$ctx/static/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" class="init">
+		$(document).ready(function() {
+			$('#example').DataTable({
+				"bLengthChange": false,
+				"bAutoWidth": true,
+				"oLanguage": {
+					"sLengthMenu": "每页显示 _MENU_ 条记录",
+					"sZeroRecords": "抱歉， 没有找到",
+					"sInfo": "共 _TOTAL_ 条数据",
+					"sInfoEmpty": "没有数据",
+					"sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": "前一页",
+						"sNext": "后一页",
+						"sLast": "尾页"
+						},
+					"sZeroRecords": "没有检索到数据"
+					}
+			});
+		} );
+	</script>
+</head>
+<body class="dt-example">
+	<div class="container">
+		<section>
+			<h1>任务状态</h1>
+			<table id="example" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>JobName</th>
+						<th>TriggerName</th>
+						<th>JobClassName</th>
+						<th>CronExpression</th>
+						<th>TriggerState</th>
+						<th>StartTime</th>
+						<th>NextFireTime</th>
+						<th>PrevFireTime</th>
+						<th>EndTime</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>JobName</th>
+						<th>TriggerName</th>
+						<th>JobClassName</th>
+						<th>CronExpression</th>
+						<th>TriggerState</th>
+						<th>StartTime</th>
+						<th>NextFireTime</th>
+						<th>PrevFireTime</th>
+						<th>EndTime</th>
+						<th>Operation</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					#foreach($job in $!jobs)
+					#set($index=$velocityCount)
+						<tr>
+							<td>$!job.jobName</td>
+							<td>$!job.triggerName</td>
+							<td>$!job.jobClassName</td>
+							<td>$!job.cronExpression</td>
+							<td>$!job.triggerState</td>
+							<td>$!job.startTime</td>
+							<td>$!job.endTime</td>
+							<td>$!job.nextFireTime</td>
+							<td>$!job.prevFireTime</td>
+							<td>
+								<span>
+									<a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">暂停</a>
+									<a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">删除</a>
+								</span>
+							</td>
+						</tr>					
+					#end
+				</tbody>
+			</table>
+		</section>
+	</div>
+</body>
+</html>
