@@ -3,8 +3,11 @@ package com.mezhou887.quartz.schedule;
 import java.util.Date;
 import java.util.List;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -14,7 +17,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.selector.Html;
 
-public class ZhihuPageProcessor implements PageProcessor {
+public class ZhihuPageProcessor extends QuartzJobBean implements PageProcessor {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -55,21 +58,22 @@ public class ZhihuPageProcessor implements PageProcessor {
         return site;
     }
 
-	public void exec() {
-		
+	@Override
+	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start zhihu:" + new Date().toString());
 		
-	   	String query = "insert into questions(url, question, username, userid, vote, answer, dealdate) values(:url, :question, :username, :userid, :vote, :answer, now())";
-    	String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
-    	String startUrl = "http://www.zhihu.com/search?type=question&q=oracle";
-    	
-    	Spider.create(new ZhihuPageProcessor()).addUrl(startUrl)
-    			 .setScheduler(new QueueScheduler())
-    			 .addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
+		String query = "insert into questions(url, question, username, userid, vote, answer, dealdate) values(:url, :question, :username, :userid, :vote, :answer, now())";
+		String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
+		String startUrl = "http://www.zhihu.com/search?type=question&q=oracle";
+		
+		Spider.create(new ZhihuPageProcessor()).addUrl(startUrl)
+		.setScheduler(new QueueScheduler())
+		.addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
+		
 	}
-	
-	public static void main(String[] args) {
-		new ZhihuPageProcessor().exec();
+
+	public static void main(String[] args) throws JobExecutionException {
+		new ZhihuPageProcessor().executeInternal(null);
 	}
 
 }

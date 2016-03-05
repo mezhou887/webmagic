@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
-public class BackupDBProcessor {
+public class BackupDBProcessor extends QuartzJobBean {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	 //默认路径分割符号
@@ -22,8 +25,8 @@ public class BackupDBProcessor {
 	
 	private String basePath;
 	
-	public void exec() {
-		
+	@Override
+	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		Date currentDate = new Date();
 		String path = setPath(basePath) + setPath(new SimpleDateFormat("yyyyMMdd").format(currentDate));
 		checkAndMakeParentDirecotry(path);
@@ -37,7 +40,7 @@ public class BackupDBProcessor {
 			logger.info("数据已导出到文件" + filePath + "中, 时间: " + new Date().toString());
 		} catch (IOException e) {
 			logger.error("数据导出失败!" + new Date().toString(), e);
-			e.printStackTrace();
+			throw new JobExecutionException(e);
 		}
 	}
 	
@@ -74,5 +77,5 @@ public class BackupDBProcessor {
 	public void setBasePath(String basePath) {
 		this.basePath = basePath;
 	}
-    
+
 }

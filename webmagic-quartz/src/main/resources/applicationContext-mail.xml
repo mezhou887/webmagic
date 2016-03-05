@@ -7,7 +7,7 @@
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="host" value="smtp.exmail.qq.com"/>
 		<property name="username" value="1033738034@qq.com"/>
-		<property name="password" value="password"/>
+		<property name="password" value=""/>
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
@@ -20,13 +20,12 @@
     <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="1033738034@qq.com" />
         <property name="to" value="mezhou887@foxmail.com" />
-        <property name="subject" value="爬虫运行状态" />
+        <property name="subject" value="任务状态监控" />
     </bean>
-
-<!--     
+<!--  
     <bean id="simpleMail" class="com.mezhou887.quartz.schedule.MailProcessor">
         <property name="mailSender" ref="mailSender" />
         <property name="simpleMailMessage" ref="simpleMailMessage" />
     </bean>
- -->    
+-->   
 </beans>

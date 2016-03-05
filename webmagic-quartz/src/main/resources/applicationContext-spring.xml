@@ -40,15 +40,24 @@
 		<!-- 监控数据库 -->
 		<property name="filters" value="mergeStat" />
 	</bean>	
-	
-	<!-- MyBatis配置 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
     
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- MyBatis配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/mezhou887/entity/*.xml"/> 
+        <property name="typeAliasesPackage" value="com.mezhou887.entity" />
+    </bean>
+	<bean id="quartzMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	    <property name="mapperInterface" value="com.mezhou887.dao.QuartzMapper" />  
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+	</bean>  	
+	
+	
+	
 	
 </beans>	

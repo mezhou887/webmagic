@@ -18,9 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mezhou887.bean.JobInfoBean;
-import com.mezhou887.bean.JobModel;
-import com.mezhou887.dao.QuartzDAO;
+import com.mezhou887.dao.QuartzMapper;
+import com.mezhou887.entity.JobInfoEntity;
+import com.mezhou887.entity.JobModel;
 
 @Service("quartzService")
 public class QuartzService {
@@ -31,7 +31,7 @@ public class QuartzService {
     private Scheduler scheduler;	
 	
 	@Autowired
-	private QuartzDAO quartzDAO;
+	private QuartzMapper quartzMapper;
 
 	//添加Job
 	@SuppressWarnings("unchecked")
@@ -87,12 +87,18 @@ public class QuartzService {
 	}
 	
 	//立刻运行
-	public Boolean startNow() {
-		return true;
+	public Boolean startNow(JobKey jobKey) {
+		try {
+			scheduler.triggerJob(jobKey);
+			return true;
+		} catch (SchedulerException e) {
+			logger.error("[SchedulerException at startNow]: ", e);
+		}
+		return false;
 	}
 	
-	public List<JobInfoBean> getAllJobs() {
-		return quartzDAO.getAllQuartzJobs();
+	public List<JobInfoEntity> getAllJobs() {
+		return quartzMapper.selectAll();
 	}	
 	
 	public Boolean shutdown(Boolean waitForJobsToComplete) {

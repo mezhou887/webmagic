@@ -1,14 +1,13 @@
-package com.mezhou887.bean;
+package com.mezhou887.entity;
 
 public class JobModel {
 	
 	private String jobName;
 	private String jobClassName;
+	private String cronExpression;
 	
 	private String jobGroup = "DEFAULT";
 	private String triggerGroup = "DEFAULT";
-	
-	private String cronExpression;
 
 	public String getJobName() {
 		return jobName;

@@ -1,7 +1,11 @@
-package com.mezhou887.bean;
+package com.mezhou887.entity;
 
-public class JobInfoBean {
+import java.io.Serializable;
 
+public class JobInfoEntity implements Serializable {
+
+	private static final long serialVersionUID = 4245640887564476204L;
+	
 	private String jobName;
 	private String triggerName;
 	private String triggerGroup = "DEFAULT";
@@ -88,6 +92,14 @@ public class JobInfoBean {
 	}
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
+	}
+	@Override
+	public String toString() {
+		return "JobInfoEntity [jobName=" + jobName + ", triggerName=" + triggerName + ", triggerGroup=" + triggerGroup
+				+ ", jobGroup=" + jobGroup + ", jobDescription=" + jobDescription + ", jobClassName=" + jobClassName
+				+ ", cronExpression=" + cronExpression + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", nextFireTime=" + nextFireTime + ", prevFireTime=" + prevFireTime + ", triggerState=" + triggerState
+				+ "]";
 	}	
 	
 }

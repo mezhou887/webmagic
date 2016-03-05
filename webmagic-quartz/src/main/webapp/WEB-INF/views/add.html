@@ -1,0 +1,92 @@
+#set($ctx=$request.contextPath)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<title>添加任务</title>
+	<link rel="stylesheet" href="$ctx/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="$ctx/static/css/bootstrap-select.css">
+	<script type="text/javascript" language="javascript" src="$ctx/static/js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" language="javascript" src="$ctx/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="$ctx/static/js/bootstrap-select.js"></script>
+	<script type="text/javascript" language="javascript" class="init">
+		
+		function back(){
+	     	location.href='$ctx/quartz/index.action';			
+		}
+	        
+	    function save(){
+	       	if($.trim($('#jobName').val()) == ""){
+	       	    alert("jobName不能为空!");
+	       	    return;
+	       	}
+	       	if($.trim($('#jobClassName').val()) == ""){
+	       	    alert("jobClassName不能为空!");
+	       	    return;
+	       	}
+	       	if($.trim($('#cronExpression').val()) == ""){
+	       	    alert("cronExpression不能为空!");
+	       	    return;
+	       	}		    	
+	    	$.ajax({
+	    		url :"$ctx/quartz/add.action",
+	    		type : "post",
+	    		dataType : "json",
+	    		data : $("#mainform").serialize(),//序列化表单数据
+	    		success : function(data) {
+	    			alert(data.status);
+	    			window.location.href = "$ctx/quartz/index.action";
+	    		}
+	    	});
+	    }
+	</script>
+</head>
+<body class="dt-example">
+	<div class="container">
+		<h2>添加任务</h2>
+		<form class="form-horizontal" role="form" id="mainform" name="mainform" method="post">
+   			<div class="form-group">
+   			</div>
+		   	<div class="form-group">
+		   		<label for="jobName" class="col-sm-2 control-label">jobName:</label>
+		    	<div class="col-sm-10">
+		            <input type="text" class="form-control" id="jobName" name="jobName"
+		            placeholder="请输入jobName">
+		      	</div>
+		   	</div>
+		   	<div class="form-group">
+		      	<label for="jobClassName" class="col-sm-2 control-label">jobClassName:</label>
+		      	<div class="col-sm-10">
+		      		<select id="jobClassName" name="jobClassName" class="selectpicker" data-live-search="true" title="请选择jobClassName"> 
+      					<option value="com.mezhou887.quartz.schedule.OneMinuteSchedule">com.mezhou887.quartz.schedule.OneMinuteSchedule</option> 
+      					<option value="com.mezhou887.quartz.schedule.OneHourSchedule">com.mezhou887.quartz.schedule.OneHourSchedule</option> 
+      				</select>
+		      	</div>
+		   	</div>
+		   	<div class="form-group">
+		      	<label for="cronExpression" class="col-sm-2 control-label">cronExpression:</label>
+		      	<div class="col-sm-10">
+		      		<select id="cronExpression" name="cronExpression" class="selectpicker" data-live-search="true" title="请选择cronExpression"> 
+      					<option value="0/30 * * * * ?">0/30 * * * * ? -- 每30秒 </option> 
+      					<option value="0 0/1 * * * ?">0 0/1 * * * ? 	-- 每分钟   </option> 
+      					<option value="0 0 0/1 * * ?">0 0 0/1 * * ? 	-- 每小时 </option> 
+      					<option value="0 0 0/2 * * ?">0 0 0/2 * * ? 	-- 每2小时</option> 
+      					<option value="0 0 0/4 * * ?">0 0 0/4 * * ? 	-- 每4小时</option> 
+      					<option value="0 0 0/6 * * ?">0 0 0/6 * * ? 	-- 每6小时</option> 
+      					<option value="0 0 0/8 * * ?">0 0 0/8 * * ? 	-- 每8小时</option> 
+      					<option value="0 0 0/12 * * ?">0 0 0/12 * * ? -- 每12小时</option> 
+      					<option value="0 0 0 * * ?">0 0 0 * * ? 	-- 每天0时</option> 
+      				</select>
+		      </div>
+		   	</div>
+		   	<div class="form-group">
+      	   	  	<div class="col-sm-offset-2 col-sm-10">
+         	  		<inpuut type="submit" onclick="save();" class="btn btn-default">提交</inpuut>
+         	  		<inpuut type="submit" onclick="back();" class="btn btn-default">返回</inpuut>
+				</div>
+      	   	</div>
+		</form>
+	</div>
+</body>
+</html>

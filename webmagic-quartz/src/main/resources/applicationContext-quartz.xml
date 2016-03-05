@@ -4,9 +4,6 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
   					  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-  <!-- 加载配置属性文件 需要处理掉TODO-->
-  <context:property-placeholder location="classpath:webmagic-quartz.properties" />
-
   <!-- quartz的调度工厂-->
   <bean name="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
   	<property name="dataSource">

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mezhou887.dao.QuartzMapper">
+
+	<!--  查询所有记录  -->
+    <select id="selectAll" resultType="JobInfoEntity">
+		SELECT triggers.trigger_name as triggerName,
+	        triggers.trigger_group as triggerGroup,
+	        triggers.job_name as jobName,
+	        triggers.job_group as jobGroup,
+	        job_d.description as jobDescription,
+	        job_d.job_class_name as jobClassName,
+	        cron_triggers.cron_expression as cronExpression,
+	 		triggers.trigger_state as triggerState,
+	 		FROM_UNIXTIME(triggers.start_time/1000,'%Y-%c-%d %h:%i:%s') as startTime,
+	 		FROM_UNIXTIME(triggers.end_time/1000,'%Y-%c-%d %h:%i:%s') as endTime,
+	 		FROM_UNIXTIME(triggers.next_fire_time/1000,'%Y-%c-%d %h:%i:%s') as nextFireTime,
+	 		FROM_UNIXTIME(triggers.prev_fire_time/1000,'%Y-%c-%d %h:%i:%s') as prevFireTime
+		FROM qrtz_triggers triggers  
+		INNER join qrtz_cron_triggers cron_triggers    
+			ON (cron_triggers.trigger_name = triggers.trigger_name AND
+				cron_triggers.trigger_group = triggers.trigger_group)  
+		INNER JOIN qrtz_job_details job_d
+	    	ON (job_d.job_name = triggers.job_name AND
+				job_d.job_group = triggers.job_group)
+    </select>
+   
+</mapper>
