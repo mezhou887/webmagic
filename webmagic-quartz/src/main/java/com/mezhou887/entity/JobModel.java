@@ -6,6 +6,7 @@ public class JobModel {
 	private String triggerName;
 	private String jobClassName;
 	private String cronExpression;
+	private boolean isListener = false;
 	
 	public String getJobName() {
 		return jobName;
@@ -37,6 +38,14 @@ public class JobModel {
 
 	public void setCronExpression(String cronExpression) {
 		this.cronExpression = cronExpression;
+	}
+
+	public boolean isListener() {
+		return isListener;
+	}
+
+	public void setListener(boolean isListener) {
+		this.isListener = isListener;
 	}
 	
 }

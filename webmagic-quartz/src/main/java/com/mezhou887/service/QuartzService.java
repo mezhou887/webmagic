@@ -10,6 +10,7 @@ import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
+import org.quartz.JobListener;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.mezhou887.dao.QuartzMapper;
 import com.mezhou887.entity.JobInfoEntity;
 import com.mezhou887.entity.JobModel;
+import com.mezhou887.listener.MailSenderJobListener;
 import com.mezhou887.utils.UUIDGenerator;
 
 @Service("quartzService")
@@ -44,6 +46,11 @@ public class QuartzService {
 			Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(model.getJobClassName());
 			JobDetail job = JobBuilder.newJob(clazz).withIdentity(model.getJobName(), jobGroup).build();
 			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(model.getTriggerName(), triggetGroup).withSchedule(cronSchedule(model.getCronExpression())).build();
+			if(model.isListener()) {
+				JobListener listener = new MailSenderJobListener();
+				scheduler.getListenerManager().addJobListener(listener);				
+			}
+			
 			Date runTime = scheduler.scheduleJob(job, trigger);
 			logger.info( "{} has been scheduled to run at: {} and repeat based on expression: {}", job.getKey(), runTime, trigger.getCronExpression());
 			return true;

@@ -2,7 +2,6 @@ package com.mezhou887.quartz.schedule;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.quartz.QuartzJobBean;

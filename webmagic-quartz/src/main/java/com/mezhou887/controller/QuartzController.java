@@ -32,13 +32,18 @@ public class QuartzController {
 	}	
 	
 	@RequestMapping(value="/add")
-	public @ResponseBody Map<String,Object> deploy(String jobName, String triggerName, String jobClassName, String cronExpression) {
+	public @ResponseBody Map<String,Object> deploy(String jobName, String triggerName, String jobClassName, String cronExpression, Boolean listener) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		JobModel model = new JobModel();
 		model.setJobName(jobName);
 		model.setTriggerName(triggerName);
 		model.setJobClassName(jobClassName); 
 		model.setCronExpression(cronExpression);
+		if(listener != null) {
+			model.setListener(true);			
+		}else {
+			model.setListener(false);						
+		}
 		map.put("status", quartzService.deploy(model));
 		return map;
 	}

@@ -15,7 +15,7 @@ public class OneMinuteSchedule extends QuartzJobBean {
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		 JobKey jobKey = context.getJobDetail().getKey();	        
+		JobKey jobKey = context.getJobDetail().getKey();	        
 		logger.info("JoName: {}  run at {}", jobKey.getName(), new Date().toString());
 	}
 
