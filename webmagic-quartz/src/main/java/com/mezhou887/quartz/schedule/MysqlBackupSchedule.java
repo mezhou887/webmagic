@@ -20,7 +20,7 @@ public class MysqlBackupSchedule extends BackupSchedule {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		String name = "alldatabases_" + new SimpleDateFormat("yyyyMMddHHmmss").format(currentDate) + ".dump";
 		String file = genRealPath() + name;
-		String stmt = "C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump " + " -u" + user + " -p" + password + " --all-databases --default-character-set=utf8 --result-file=" + file; 
+		String stmt = "mysqldump " + " -u" + user + " -p" + password + " --all-databases --default-character-set=utf8 --result-file=" + file; 
 		
 		try {
 			Runtime.getRuntime().exec(stmt);
