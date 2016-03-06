@@ -14,8 +14,18 @@
 	
 	<description>Spring Configuration</description>
 	
+	<context:annotation-config/>
+	
 	<!-- 加载配置属性文件 -->
-	<context:property-placeholder location="classpath:webmagic-quartz.properties"/>
+	<bean id="PropertiesLoader" class="com.mezhou887.utils.PropertiesLoader">
+		<property name="locations">
+			<list>
+				<value>classpath:webmagic-quartz.properties</value>
+				<value>classpath:quartz.properties</value>
+			</list>
+		</property>	
+	</bean>
+	
 	
 	<bean id="SpringContextUtil" class="com.mezhou887.utils.SpringContextHolder" scope="singleton"/>
 	
@@ -81,13 +91,9 @@
         <property name="from" value="1033738034@qq.com" />
         <property name="to" value="mezhou887@foxmail.com" />
         <property name="subject" value="任务状态监控" />
+        <property name="text" value="测试邮件" />
     </bean>
-  
-    <bean id="simpleMail" class="com.mezhou887.quartz.schedule.MailSchedule">
-        <property name="sender" ref="sender" />
-        <property name="message" ref="message" />
-    </bean>
-
+    
 	<!-- quartz的调度工厂-->
 	<bean name="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="dataSource">
@@ -96,9 +102,5 @@
   		<property name="applicationContextSchedulerContextKey"  value="applicationContextKey" /> 
     	<property name="configLocation" value="classpath:quartz.properties"/>
 	</bean>    
-    		
-	
-	
-	
 	
 </beans>	

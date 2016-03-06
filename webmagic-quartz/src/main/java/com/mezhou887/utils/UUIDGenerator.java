@@ -8,7 +8,7 @@ public class UUIDGenerator {
 	private static String address = null;
 	private static Long workerId = -1L;
 	
-	private static String getAddress() {
+	public static String getAddress() {
 		if(address == null) {
 			InetAddress addr = null;
 			try {

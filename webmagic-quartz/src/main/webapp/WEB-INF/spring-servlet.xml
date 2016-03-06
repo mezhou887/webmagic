@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- 开启Bean自动扫描 -->
-	<context:component-scan base-package="com.mezhou887" /> 
+	<context:component-scan base-package="com.mezhou887.*" /> 
 	
 	<!-- 对静态资源文件的访问   --> 
 	<mvc:default-servlet-handler/>
