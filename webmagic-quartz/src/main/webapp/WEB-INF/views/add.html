@@ -21,6 +21,10 @@
 	       	    alert("jobName不能为空!");
 	       	    return;
 	       	}
+	       	if($.trim($('#triggerName').val()) == ""){
+	       	    alert("triggerName不能为空!");
+	       	    return;
+	       	}
 	       	if($.trim($('#jobClassName').val()) == ""){
 	       	    alert("jobClassName不能为空!");
 	       	    return;
@@ -56,11 +60,21 @@
 		      	</div>
 		   	</div>
 		   	<div class="form-group">
+		   		<label for="triggerName" class="col-sm-2 control-label">triggerName:</label>
+		    	<div class="col-sm-10">
+		            <input type="text" class="form-control" id="triggerName" name="triggerName"
+		            placeholder="请输入triggerName">
+		      	</div>
+		   	</div>
+		   	<div class="form-group">
 		      	<label for="jobClassName" class="col-sm-2 control-label">jobClassName:</label>
 		      	<div class="col-sm-10">
 		      		<select id="jobClassName" name="jobClassName" class="selectpicker" data-live-search="true" title="请选择jobClassName"> 
-      					<option value="com.mezhou887.quartz.schedule.OneMinuteSchedule">com.mezhou887.quartz.schedule.OneMinuteSchedule</option> 
-      					<option value="com.mezhou887.quartz.schedule.OneHourSchedule">com.mezhou887.quartz.schedule.OneHourSchedule</option> 
+      					<option value="com.mezhou887.quartz.schedule.OneMinuteSchedule">OneMinuteSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.OneHourSchedule">OneHourSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.MailSchedule">MailSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.MysqlBackupSchedule">MysqlBackupSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.CompressorSchedule">CompressorSchedule </option> 
       				</select>
 		      	</div>
 		   	</div>

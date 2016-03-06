@@ -111,7 +111,6 @@
 						<th>StartTime</th>
 						<th>NextFireTime</th>
 						<th>PrevFireTime</th>
-						<th>EndTime</th>
 						<th>Operation</th>
 					</tr>
 				</thead>
@@ -125,7 +124,6 @@
 						<th>StartTime</th>
 						<th>NextFireTime</th>
 						<th>PrevFireTime</th>
-						<th>EndTime</th>
 						<th>Operation</th>
 					</tr>
 				</tfoot>
@@ -141,18 +139,20 @@
 							<td>$!job.startTime</td>
 							<td>$!job.nextFireTime</td>
 							<td>$!job.prevFireTime</td>
-							<td>$!job.endTime</td>
 							<td>
 								<span>
-									#if($!job.triggerState == 'ACQUIRED')
-										<input id="resumeJob" type="button" onclick="resumeJob('$!job.jobName', '$!job.jobGroup')" value="继续"/>									
+									#if($!job.triggerState=="ACQUIRED")
 										<input id="pauseJob" type="button" onclick="pauseJob('$!job.jobName', '$!job.jobGroup')" value="暂停"/>
+									#elseif($!job.triggerState=="WAITING")
+										<input id="pauseJob" type="button" onclick="pauseJob('$!job.jobName', '$!job.jobGroup')" value="暂停"/>
+									#elseif($!job.triggerState=="PAUSED")  
+										<input id="resumeJob" type="button" onclick="resumeJob('$!job.jobName', '$!job.jobGroup')" value="继续"/>	
 									#else
-										<input id="resumeJob" type="button" onclick="resumeJob('$!job.jobName', '$!job.jobGroup')" value="继续"/>									
-										<input id="pauseJob" type="button" onclick="pauseJob('$!job.jobName', '$!job.jobGroup')" value="暂停"/>
+										<input id="resumeJob" type="button" onclick="resumeJob('$!job.jobName', '$!job.jobGroup')" value="继续"/>	
+										<input id="pauseJob" type="button" onclick="pauseJob('$!job.jobName', '$!job.jobGroup')" value="暂停"/>																		
 									#end
 									<input id="deleteJob" type="button" onclick="deleteJob('$!job.jobName', '$!job.jobGroup')" value="删除"/>
-									<input id="runJob" type="button" onclick="runJob('$!job.jobName', '$!job.jobGroup')" value="立刻执行"/>
+									<input id="runJob" type="button" onclick="runJob('$!job.jobName', '$!job.jobGroup')" value="运行"/>
 								</span>
 							</td>
 						</tr>					

@@ -3,12 +3,10 @@ package com.mezhou887.entity;
 public class JobModel {
 	
 	private String jobName;
+	private String triggerName;
 	private String jobClassName;
 	private String cronExpression;
 	
-	private String jobGroup = "DEFAULT";
-	private String triggerGroup = "DEFAULT";
-
 	public String getJobName() {
 		return jobName;
 	}
@@ -25,20 +23,12 @@ public class JobModel {
 		this.jobClassName = jobClassName;
 	}
 
-	public String getJobGroup() {
-		return jobGroup;
+	public String getTriggerName() {
+		return triggerName;
 	}
 
-	public void setJobGroup(String jobGroup) {
-		this.jobGroup = jobGroup;
-	}
-
-	public String getTriggerGroup() {
-		return triggerGroup;
-	}
-
-	public void setTriggerGroup(String triggerGroup) {
-		this.triggerGroup = triggerGroup;
+	public void setTriggerName(String triggerName) {
+		this.triggerName = triggerName;
 	}
 
 	public String getCronExpression() {

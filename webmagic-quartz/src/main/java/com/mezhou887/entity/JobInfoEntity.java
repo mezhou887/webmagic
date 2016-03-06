@@ -8,8 +8,8 @@ public class JobInfoEntity implements Serializable {
 	
 	private String jobName;
 	private String triggerName;
-	private String triggerGroup = "DEFAULT";
-	private String jobGroup = "DEFAULT";
+	private String triggerGroup;
+	private String jobGroup;
 	
 	private String jobDescription;
 	private String jobClassName;

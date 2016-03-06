@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import com.mezhou887.utils.UUIDGenerator;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -46,6 +48,7 @@ public class ZhihuPageProcessor extends QuartzJobBean implements PageProcessor {
                 page.putField("userid", new Html(answer).xpath("//a[@class='author-link']/@href"));
                 page.putField("username", new Html(answer).xpath("//a[@class='author-link']/text()"));
                 page.putField("answer", new Html(answer).xpath("//div[@id='zh-question-answer-wrap']/div//div[@class='zh-summary summary clearfix']/text()"));
+                page.putField("id",UUIDGenerator.genDBUUID());
                 exist = true;
             }
         }
@@ -62,7 +65,7 @@ public class ZhihuPageProcessor extends QuartzJobBean implements PageProcessor {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start zhihu:" + new Date().toString());
 		
-		String query = "insert into questions(url, question, username, userid, vote, answer, dealdate) values(:url, :question, :username, :userid, :vote, :answer, now())";
+		String query = "insert into data_questions(id, url, question, username, userid, vote, answer, dealdate) values(:id, :url, :question, :username, :userid, :vote, :answer, now())";
 		String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
 		String startUrl = "http://www.zhihu.com/search?type=question&q=oracle";
 		

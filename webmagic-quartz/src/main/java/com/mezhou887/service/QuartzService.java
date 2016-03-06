@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.mezhou887.dao.QuartzMapper;
 import com.mezhou887.entity.JobInfoEntity;
 import com.mezhou887.entity.JobModel;
+import com.mezhou887.utils.UUIDGenerator;
 
 @Service("quartzService")
 public class QuartzService {
@@ -36,11 +37,13 @@ public class QuartzService {
 	//Ìí¼ÓJob
 	@SuppressWarnings("unchecked")
 	public Boolean deploy(JobModel model) {
+		String jobGroup = "JobGroup"+UUIDGenerator.genUUID();
+		String triggetGroup = "Trigger"+ UUIDGenerator.genUUID();
 
 		try {
 			Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(model.getJobClassName());
-			JobDetail job = JobBuilder.newJob(clazz).withIdentity(model.getJobName(), model.getJobGroup()).build();
-			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(model.getTriggerGroup(), model.getJobGroup()).withSchedule(cronSchedule(model.getCronExpression())).build();
+			JobDetail job = JobBuilder.newJob(clazz).withIdentity(model.getJobName(), jobGroup).build();
+			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(model.getTriggerName(), triggetGroup).withSchedule(cronSchedule(model.getCronExpression())).build();
 			Date runTime = scheduler.scheduleJob(job, trigger);
 			logger.info( "{} has been scheduled to run at: {} and repeat based on expression: {}", job.getKey(), runTime, trigger.getCronExpression());
 			return true;
