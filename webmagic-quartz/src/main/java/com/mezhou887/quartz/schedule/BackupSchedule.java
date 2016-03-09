@@ -1,43 +1,37 @@
 package com.mezhou887.quartz.schedule;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import com.mezhou887.utils.FolderUtils;
 import com.mezhou887.utils.PropertiesLoader;
 
 public abstract class BackupSchedule extends QuartzJobBean {
 	
 	protected Calendar cal = Calendar.getInstance();
 	
+	protected Logger logger = LoggerFactory.getLogger(getClass());		
+	
 	 //Ä¬ÈÏÂ·¾¶·Ö¸î·ûºÅ
 	public static String PATH_SEPERATOR = "/";
 	
-	protected String genRealPath() {
-		String basePath = PropertiesLoader.getProperties("basePath");
-		String path = setPath(basePath) + setPath(new SimpleDateFormat("yyyyMMdd").format(cal.getTime()));
-		checkAndMakeParentDirecotry(path);
-		return path ;
+	protected String getFolderPath(String pattern) {
+		if(StringUtils.isBlank(pattern)){
+			pattern = "yyyyMMdd";
+		}
+		String dataPath = PropertiesLoader.getProperties("dataPath");
+		String folderPath = FolderUtils.setPath(dataPath) + FolderUtils.setPath(new SimpleDateFormat(pattern).format(cal.getTime()));
+		FolderUtils.checkAndMakeDirecotry(folderPath);
+		return folderPath ;
+	}
+	
+	protected String getFolderPath() {
+		return getFolderPath(null);
 	}
 
-    public String setPath(String path) {
-        if (!path.endsWith(PATH_SEPERATOR)) {
-            path += PATH_SEPERATOR;
-        }
-        return path;
-    }
-    
-    public void checkAndMakeParentDirecotry(String fullName) {
-        int index = fullName.lastIndexOf(PATH_SEPERATOR);
-        if (index > 0) {
-            String path = fullName.substring(0, index);
-            File file = new File(path);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-        }
-    }
-	
 }

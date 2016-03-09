@@ -1,24 +1,34 @@
 package com.mezhou887.utils;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
-public class JedisUtils<K, V> {
+public class JedisUtils {
 
 	@Autowired  
-    protected RedisTemplate<K, V> redisTemplate; 
+    protected RedisTemplate<String, String> redisTemplate; 
 	
-	public void setRedisTemplate(RedisTemplate<K, V> redisTemplate) {  
+	@Resource(name="redisTemplate")
+	private SetOperations<String, String> setOps;
+	
+	public void setRedisTemplate(RedisTemplate<String, String> redisTemplate) {  
         this.redisTemplate = redisTemplate;  
     }  
       
     protected RedisSerializer<String> getRedisSerializer() {  
         return redisTemplate.getStringSerializer();  
     }  
+    
+    public void add(String key, String message) {
+    	setOps.add(key, message);
+    }
     
     public void write(final String key, final String message)  {
     	redisTemplate.execute(new RedisCallback<Object>() {

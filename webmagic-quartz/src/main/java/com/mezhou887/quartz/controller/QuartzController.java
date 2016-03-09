@@ -1,4 +1,4 @@
-package com.mezhou887.controller;
+package com.mezhou887.quartz.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mezhou887.entity.JobModel;
-import com.mezhou887.service.QuartzService;
+import com.mezhou887.quartz.service.QuartzService;
 
 @Controller
 @RequestMapping("/quartz")
 public class QuartzController {
+	
+	private final String STATUS = "status";
 	
 	@Autowired
 	private QuartzService quartzService;	
@@ -44,7 +46,7 @@ public class QuartzController {
 		}else {
 			model.setListener(false);						
 		}
-		map.put("status", quartzService.deploy(model));
+		map.put(STATUS, quartzService.deploy(model));
 		return map;
 	}
 	
@@ -52,7 +54,7 @@ public class QuartzController {
 	public @ResponseBody Map<String,Object> unDeploy(String jobName, String jobGroup) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		JobKey jobKey = new JobKey(jobName, jobGroup);
-		map.put("status", quartzService.unDeploy(jobKey));
+		map.put(STATUS, quartzService.unDeploy(jobKey));
 		return map;
 	}
 	
@@ -60,7 +62,7 @@ public class QuartzController {
 	public @ResponseBody Map<String,Object> pause(String jobName, String jobGroup) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		JobKey jobKey = new JobKey(jobName, jobGroup);
-		map.put("status", quartzService.pause(jobKey));
+		map.put(STATUS, quartzService.pause(jobKey));
 		return map;
 	}
 	
@@ -68,7 +70,7 @@ public class QuartzController {
 	public @ResponseBody Map<String,Object> resume(String jobName, String jobGroup) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		JobKey jobKey = new JobKey(jobName, jobGroup);
-		map.put("status", quartzService.resume(jobKey));
+		map.put(STATUS, quartzService.resume(jobKey));
 		return map;
 	}	
 	
@@ -76,14 +78,7 @@ public class QuartzController {
 	public @ResponseBody Map<String,Object> startNow(String jobName, String jobGroup) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		JobKey jobKey = new JobKey(jobName, jobGroup);
-		map.put("status", quartzService.startNow(jobKey));
-		return map;
-	}
-	
-	@RequestMapping(value="/shutdown")
-	public @ResponseBody Map<String,Object> shutdown() {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("status", quartzService.shutdown(true));
+		map.put(STATUS, quartzService.startNow(jobKey));
 		return map;
 	}
 	

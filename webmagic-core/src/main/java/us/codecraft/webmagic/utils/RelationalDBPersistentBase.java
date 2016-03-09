@@ -22,6 +22,8 @@ public class RelationalDBPersistentBase  implements Pipeline {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Connection conn = null;
     private String sql;
+    protected static String DEFAULT_NAME = "mezhou887";
+    protected static String DEFAULT_PASS = "Admin1234#";
     
     public void initComponent(String driver, String connStr, String user, String password, String sql) {
     	this.sql = sql;

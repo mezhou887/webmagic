@@ -6,8 +6,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
-@Component
-public class SimpleMail {
+@Component("sendMailUtil") 
+public class SendMailUtil {
 	
 	@Autowired
 	MailSender sender;
@@ -15,11 +15,12 @@ public class SimpleMail {
 	@Autowired
 	SimpleMailMessage message;
 	
-	public void sendMessage(String text) {
-		if(StringUtils.isNotBlank(text)) {
-			message.setText(text);
-		}
-		sender.send(message);
+	/**
+	 * ·¢ËÍÆÕÍ¨ÓÊ¼þ
+	 * @param text
+	 */
+	public void sendCommonMail(String subject, String message) {
+		
 	}
 
 }

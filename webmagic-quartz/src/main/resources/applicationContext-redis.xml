@@ -20,15 +20,15 @@
 		<property name="testOnBorrow" value="true" />
 	</bean>
 	
-	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<constructor-arg name="poolConfig" ref="poolConfig"/>
 		<property name="hostName" value="${redis.host}" />
 		<property name="port" value="${redis.port}" />
 		<property name="password" value="${redis.pass}" />
-		<property name="poolConfig" ref="poolConfig" />
 	</bean>	
 	
     <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
-        <property name="connectionFactory"   ref="redisConnectionFactory" />  
+        <property name="connectionFactory"   ref="jedisConnectionFactory" />  
     </bean>
     
     <bean id="jedisUtils" class="com.mezhou887.utils.JedisUtils" />  	

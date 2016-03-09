@@ -47,7 +47,7 @@
 	</bean>
 
 	<!-- 消息监听器 -->  
-	<bean id="testMessageListener" class="com.mezhou887.queue.TestMessageListener"/>      
+	<bean id="testMessageListener" class="com.mezhou887.jms.test.JMSTestMessageListener"/>      
   
 	<!-- 消息监听容器 -->  
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  

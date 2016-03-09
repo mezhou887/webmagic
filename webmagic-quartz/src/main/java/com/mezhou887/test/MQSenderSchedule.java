@@ -1,4 +1,4 @@
-package com.mezhou887.quartz.schedule;
+package com.mezhou887.test;
 
 import java.util.Date;
 
@@ -6,14 +6,14 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.mezhou887.queue.TestMessageSender;
+import com.mezhou887.jms.test.JMSTestMessageSender;
 import com.mezhou887.utils.SpringContextHolder;
 
-public class QueueSenderSchedule extends QuartzJobBean {
+public class MQSenderSchedule extends QuartzJobBean {
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		TestMessageSender sender = SpringContextHolder.getBean("testMessageSender");
+		JMSTestMessageSender sender = SpringContextHolder.getBean("testMessageSender");
 		sender.send("queue", "message" + new Date());
 	}
 

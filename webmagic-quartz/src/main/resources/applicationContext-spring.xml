@@ -61,6 +61,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	
 	<!-- MyBatis配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -93,8 +94,6 @@
     <bean id="message" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="${mail.from}" />
         <property name="to" value="${mail.to}" />
-        <property name="subject" value="${mail.subject}" />
-        <property name="text" value="${mail.text}" />
     </bean>
     
 	<bean id="simpleMail" class="com.mezhou887.utils.SimpleMail"/>

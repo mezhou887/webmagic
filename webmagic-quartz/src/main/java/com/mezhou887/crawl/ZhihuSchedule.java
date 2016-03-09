@@ -1,4 +1,4 @@
-package com.mezhou887.quartz.schedule;
+package com.mezhou887.crawl;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.selector.Html;
 
-public class ZhihuPageSchedule extends QuartzJobBean implements PageProcessor {
+public class ZhihuSchedule extends QuartzJobBean implements PageProcessor {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -68,14 +68,14 @@ public class ZhihuPageSchedule extends QuartzJobBean implements PageProcessor {
 		String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
 		String startUrl = "http://www.zhihu.com/search?type=question&q=Áµ°®";
 		
-		Spider.create(new ZhihuPageSchedule()).addUrl(startUrl)
+		Spider.create(new ZhihuSchedule()).addUrl(startUrl)
 		.setScheduler(new QueueScheduler())
 		.addPipeline(new MysqlPipline(connStr, query)).thread(10).run();
 		
 	}
 
 	public static void main(String[] args) throws JobExecutionException {
-		new ZhihuPageSchedule().executeInternal(null);
+		new ZhihuSchedule().executeInternal(null);
 	}
 
 }

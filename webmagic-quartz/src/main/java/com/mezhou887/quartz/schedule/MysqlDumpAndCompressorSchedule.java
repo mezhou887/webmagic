@@ -6,26 +6,21 @@ import java.util.Date;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.mezhou887.utils.PropertiesLoader;
 
 /**
- * 使用Linux的管道命令，在window下不可用
+ * 使用Linux的管道命令执行mysqldump命令，该任务在window下不可用
  * @author Administrator
- *
  */
-public class MysqlBackupAndCompressorSchedule extends BackupSchedule {
+public class MysqlDumpAndCompressorSchedule extends BackupSchedule {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		String user = PropertiesLoader.getProperties("jdbc.username");
 		String password = PropertiesLoader.getProperties("jdbc.password");
-		String name = "alldatabases_" + new SimpleDateFormat("yyyyMMddHHmmss").format(cal.getTime()) + ".dump.gz";
-		String file = genRealPath() + name;
+		String name = "alldatabases_" + new SimpleDateFormat("yyyyMMddHHmm").format(cal.getTime()) + ".dump.gz";
+		String file = getFolderPath() + name;
 		String stmt = "mysqldump " + " -u" + user + " -p" + password + " --all-databases --default-character-set=utf8  | gzip >" + file; 
 		
 		try {

@@ -1,4 +1,4 @@
-package com.mezhou887.service;
+package com.mezhou887.quartz.service;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 
@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mezhou887.dao.QuartzMapper;
 import com.mezhou887.entity.JobInfoEntity;
 import com.mezhou887.entity.JobModel;
 import com.mezhou887.listener.MailSenderJobListener;
+import com.mezhou887.quartz.dao.QuartzMapper;
 import com.mezhou887.utils.UUIDGenerator;
 
 @Service("quartzService")
@@ -52,9 +52,8 @@ public class QuartzService {
 			}
 			
 			Date runTime = scheduler.scheduleJob(job, trigger);
-			logger.info( "{} has been scheduled to run at: {} and repeat based on expression: "+ trigger.getCronExpression(), job.getKey(), runTime);
+			logger.info( "{} has been scheduled to run at: {} and repeat based on expression:  {}" + trigger.getCronExpression(), job.getKey(), runTime);
 			return true;
-			
 		} catch (ClassNotFoundException e) {
 			logger.error("[ClassNotFoundException at deploy]: ", e);
 		} catch (SchedulerException e) {
@@ -107,23 +106,9 @@ public class QuartzService {
 		return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<JobInfoEntity> getAllJobs() {
-		return quartzMapper.selectAll();
+		return quartzMapper.queryAll();
 	}	
-	
-	public Boolean shutdown(Boolean waitForJobsToComplete) {
-		try {
-			if(waitForJobsToComplete == null) {
-				scheduler.shutdown();
-			}
-			if(!scheduler.isShutdown()) {
-				scheduler.shutdown(waitForJobsToComplete);		
-			}
-			return true;
-		} catch (SchedulerException e) {
-			logger.error("[SchedulerException at shutdown]: ", e);
-		}
-		return false;
-	}
 
 }
