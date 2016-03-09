@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.mezhou887.utils.PropertiesLoader;
 
 public class MysqlBackupSchedule extends BackupSchedule {
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Override

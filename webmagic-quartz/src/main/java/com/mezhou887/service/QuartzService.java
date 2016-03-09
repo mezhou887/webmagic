@@ -52,7 +52,7 @@ public class QuartzService {
 			}
 			
 			Date runTime = scheduler.scheduleJob(job, trigger);
-			logger.info( "{} has been scheduled to run at: {} and repeat based on expression: {}", job.getKey(), runTime, trigger.getCronExpression());
+			logger.info( "{} has been scheduled to run at: {} and repeat based on expression: "+ trigger.getCronExpression(), job.getKey(), runTime);
 			return true;
 			
 		} catch (ClassNotFoundException e) {
