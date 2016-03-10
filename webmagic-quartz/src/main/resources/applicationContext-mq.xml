@@ -47,13 +47,13 @@
 	</bean>
 
 	<!-- 消息监听器 -->  
-	<bean id="testMessageListener" class="com.mezhou887.jms.test.JMSTestMessageListener"/>      
+	<bean id="jmsMessageListener" class="com.mezhou887.jms.test.JMSTestMessageListener"/>      
   
 	<!-- 消息监听容器 -->  
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
     	<property name="connectionFactory" ref="connectionFactory" />  
     	<property name="destination" ref="queueDestination" />  
-    	<property name="messageListener" ref="testMessageListener" />  
+    	<property name="messageListener" ref="jmsMessageListener" />  
 	</bean>  
 	
 </beans>	

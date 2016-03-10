@@ -1,6 +1,5 @@
 package com.mezhou887.utils;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,8 +18,10 @@ public class SendMailUtil {
 	 * ·¢ËÍÆÕÍ¨ÓÊ¼þ
 	 * @param text
 	 */
-	public void sendCommonMail(String subject, String message) {
-		
+	public void sendCommonMail(String subject, String context) {
+		message.setSubject(subject);
+		message.setText(context);
+		sender.send(message);
 	}
 
 }
