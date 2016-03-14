@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mezhou887.quartz.dao.ZhihuMapper">
+	<!--  查询所有记录  -->
+    <select id="queryAll" resultType="com.mezhou887.entity.ZhihuEntity">
+		SELECT id, url, question, username, answer FROM data_zhihu where username is not null and answer is not null;
+    </select>
+   
+</mapper>

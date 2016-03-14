@@ -106,7 +106,6 @@ public class QuartzService {
 		return false;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<JobInfoEntity> getAllJobs() {
 		return quartzMapper.queryAll();
 	}	

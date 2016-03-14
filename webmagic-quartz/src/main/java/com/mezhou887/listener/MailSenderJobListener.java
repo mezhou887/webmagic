@@ -1,5 +1,6 @@
 package com.mezhou887.listener;
 
+import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.listeners.JobListenerSupport;
@@ -15,9 +16,11 @@ public class MailSenderJobListener  extends JobListenerSupport {
 
 	public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
 		SendMailUtil sendMailUtil = SpringContextHolder.getBean("sendMailUtil");	
-		String subject = "任务状态监控";
-		String message = "邮件通知";
-		
+		String subject = "任务状态监控-邮件通知";
+		String message = context.getJobDetail().getJobDataMap().getString("message");
+		if(StringUtils.isBlank(message)) {
+			message = "no message context";
+		}
 		sendMailUtil.sendCommonMail(subject, message);
 	}
 

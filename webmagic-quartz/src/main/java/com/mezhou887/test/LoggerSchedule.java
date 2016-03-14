@@ -19,6 +19,7 @@ public class LoggerSchedule extends QuartzJobBean {
 		logger.info("JobKeyGroup: ", context.getJobDetail().getKey().getGroup());
 		logger.info("TriggerKeyName: ", context.getTrigger().getKey().getName());
 		logger.info("TriggerKeyGroup: ", context.getTrigger().getKey().getGroup());
+        context.getJobDetail().getJobDataMap().put("message", this.getClass().getName()+"Ö´ÐÐÍê³É");	
 	}
 
 }

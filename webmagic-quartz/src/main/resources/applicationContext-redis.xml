@@ -31,7 +31,4 @@
         <property name="connectionFactory"   ref="jedisConnectionFactory" />  
     </bean>
     
-    <bean id="jedisUtils" class="com.mezhou887.utils.JedisUtils" />  	
-
-    
 </beans>	

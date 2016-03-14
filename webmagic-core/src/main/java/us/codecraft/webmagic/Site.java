@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class Site {
 
-    private String domain;
+    private String domain; //域名
 
     private String userAgent; //User-Agent
 
@@ -28,10 +28,7 @@ public class Site {
 
     private String charset;  //字符编码
 
-    /**
-     * startUrls is the urls the crawler to start with.
-     */
-    private List<Request> startRequests = new ArrayList<Request>();
+    private List<Request> startRequests = new ArrayList<Request>(); // 开始爬取的链接
 
     private int sleepTime = 5000; // 设置抓取间隔
 
@@ -53,24 +50,14 @@ public class Site {
 
     private ProxyPool httpProxyPool;
 
-    private boolean useGzip = true;
-
-    /**
-     * @see us.codecraft.webmagic.utils.HttpConstant.Header
-     * @deprecated
-     */
-    public static interface HeaderConst {
-
-        public static final String REFERER = "Referer";
-    }
-
+    private boolean useGzip = true; // 定义使用压缩
 
     static {
-        DEFAULT_STATUS_CODE_SET.add(200);
+        DEFAULT_STATUS_CODE_SET.add(200); //在这里添加默认成功的状态码是200
     }
 
     /**
-     * 这里实例化，生成一个新的对象
+     * 这里实例化，生成一个新的网站对象
      * @return this
      */
     public static Site me() {
@@ -78,11 +65,10 @@ public class Site {
     }
 
     /**
-     * Add a cookie with domain {@link #getDomain()}
-     *
-     * @param name name
-     * @param value value
-     * @return this
+     * 增加一个Cookie到默认的域名上
+     * @param name
+     * @param value
+     * @return
      */
     public Site addCookie(String name, String value) {
         defaultCookies.put(name, value);
@@ -90,12 +76,11 @@ public class Site {
     }
 
     /**
-     * Add a cookie with specific domain.
-     *
-     * @param domain domain
-     * @param name name
-     * @param value value
-     * @return this
+     * 增加一个Cookie到指定的域名上
+     * @param domain
+     * @param name
+     * @param value
+     * @return
      */
     public Site addCookie(String domain, String name, String value) {
         cookies.put(domain, name, value);

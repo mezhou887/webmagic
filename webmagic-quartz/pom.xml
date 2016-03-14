@@ -8,11 +8,11 @@
 	<properties>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<activemq.version>5.6.0</activemq.version>
+		<lucene.version>4.10.4</lucene.version>
 	</properties>
 	
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
-	
 		<repository>
             <id>oschina-repos</id>
             <name>Oschina Releases</name>
@@ -62,11 +62,6 @@
 		<!-- activeMQ -->
 		<dependency>  
             <groupId>org.apache.activemq</groupId>  
-            <artifactId>activemq-all</artifactId>  
-            <version>${activemq.version}</version>  
-        </dependency> 
-		<dependency>  
-            <groupId>org.apache.activemq</groupId>  
             <artifactId>activemq-core</artifactId>  
             <version>${activemq.version}</version>
             <exclusions>
@@ -108,6 +103,10 @@
             		<artifactId>spring-context</artifactId>
             		<groupId>org.springframework</groupId>
             	</exclusion>
+            	<exclusion>
+            		<artifactId>commons-net</artifactId>
+            		<groupId>commons-net</groupId>
+            	</exclusion>
             </exclusions>
 		</dependency>         
 		<dependency>  
@@ -135,6 +134,16 @@
             		<groupId>org.slf4j</groupId>
             	</exclusion>
             </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.management.j2ee</groupId>
+			<artifactId>javax.management.j2ee-api</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 		
 		<!-- spring -->
@@ -202,6 +211,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>									
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>									
 		</dependency>
 		
@@ -283,17 +297,6 @@
 		
 		<!-- json -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.7.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.7.2</version>
-		</dependency>
-				
-		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
@@ -326,6 +329,14 @@
 				<exclusion>
 					<artifactId>oro</artifactId>
 					<groupId>oro</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-validator</artifactId>
+					<groupId>commons-validator</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -375,14 +386,13 @@
 		<!-- logger -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.12</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -402,6 +412,43 @@
 			<artifactId>ojdbc14</artifactId>
 			<version>10.2.0.4.0</version>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- lucene -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queries</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-memory</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>david.lucene.analyzer</groupId>
+			<artifactId>IKAnalyzer</artifactId>
+			<version>5.0.1</version>
 		</dependency>
 
 	</dependencies>

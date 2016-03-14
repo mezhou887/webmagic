@@ -14,7 +14,7 @@ public class MQSenderSchedule extends QuartzJobBean {
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		JMSTestMessageSender sender = SpringContextHolder.getBean("testMessageSender");
-		sender.send("queue", "message" + new Date());
+		sender.send("queue", "message" + new Date() + "¡£class: " + this.getClass().getName());
 	}
 
 }

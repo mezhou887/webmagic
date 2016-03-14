@@ -39,7 +39,7 @@
 	    		dataType : "json",
 	    		data : $("#mainform").serialize(),//序列化表单数据
 	    		success : function(data) {
-	    			alert(data.status);
+	    			alert(data);
 	    			window.location.href = "$ctx/quartz/index.action";
 	    		}
 	    	});
@@ -71,11 +71,11 @@
 		      	<div class="col-sm-10">
 		      		<select id="jobClassName" name="jobClassName" class="selectpicker" data-live-search="true" title="请选择jobClassName"> 
       					<option value="com.mezhou887.test.LoggerSchedule">test.LoggerSchedule </option> 
-      					<option value="com.mezhou887.test.RedisSchedule">test.RedisSchedule </option> 
-      					<option value="com.mezhou887.quartz.schedule.MysqlBackupSchedule">MysqlBackupSchedule </option> 
-      					<option value="com.mezhou887.quartz.schedule.CompressorSchedule">CompressorSchedule </option> 
+      					<option value="com.mezhou887.test.MQSenderSchedule">test.MQSenderSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.MysqlDumpSchedule">schedule.MysqlDumpSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.CompressorSchedule">schedule.CompressorSchedule </option> 
+      					<option value="com.mezhou887.quartz.schedule.LuceneSchedule">schedule.LuceneSchedule </option> 
       					<option value="com.mezhou887.crawl.ZhihuSchedule">crawl.ZhihuSchedule </option> 
-      					<option value="com.mezhou887.quartz.schedule.QueueSenderSchedule">QueueSenderSchedule </option> 
       				</select>
 		      	</div>
 		   	</div>

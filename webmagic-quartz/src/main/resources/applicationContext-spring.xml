@@ -76,6 +76,10 @@
 	    <property name="mapperInterface" value="com.mezhou887.quartz.dao.QuartzMapper" />  
 	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
 	</bean>  
+	<bean id="zhihuMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+	    <property name="mapperInterface" value="com.mezhou887.quartz.dao.ZhihuMapper" />  
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+	</bean>  
 	
 	<!-- Mail配置 -->
 	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

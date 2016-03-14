@@ -472,10 +472,9 @@ public class Spider implements Runnable, Task {
     }
 
     /**
-     * Add urls to crawl. <br>
-     *
-     * @param urls urls
-     * @return this
+     * 增加urls到爬虫中，可以多个url，也可以一个url
+     * @param urls
+     * @return
      */
     public Spider addUrl(String... urls) {
         for (String url : urls) {

@@ -31,7 +31,7 @@ public class JMSTestMessageSender {
 				return session.createTextMessage(message);
 			}
 		});
-		logger.info("发送一条消息到队列{}上", queueName);
+		logger.info("发送一条消息到测试队列{}上", queueName);
 	}
 	
 }

@@ -45,7 +45,9 @@ public class CompressorSchedule extends QuartzJobBean {
 		String zipFile = FolderUtils.setPath(exportPath)+UUIDGenerator.getAddress()+zipDay+".zip";
 		ZipCompressor zc = new  ZipCompressor(zipFile);  
         zc.compressExe(folder); 
-        logger.info("文件夹{}已经压缩到文件{}中。",folder, zipFile);
+        String message = "文件夹" + folder + "已经压缩到文件"+zipFile+"中。";
+        context.getJobDetail().getJobDataMap().put("message", message+this.getClass().getName());		
+        logger.info(message);
 	}
 
 }

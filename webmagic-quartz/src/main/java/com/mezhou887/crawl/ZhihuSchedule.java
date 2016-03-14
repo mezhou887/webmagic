@@ -29,7 +29,7 @@ public class ZhihuSchedule extends QuartzJobBean implements PageProcessor {
             .addHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3")
             .setCharset("UTF-8");
     
-	 private static final int voteNum = 100;
+	 private static final int voteNum = 50;
 	    
 	public void process(Page page) {
         List<String> relativeUrl = page.getHtml().xpath("//li[@class='item clearfix']/div/a/@href").all(); 
@@ -47,6 +47,7 @@ public class ZhihuSchedule extends QuartzJobBean implements PageProcessor {
                 page.putField("question", page.getHtml().xpath("//div[@id='zh-question-title']//h2/text()").toString());
                 page.putField("userid", new Html(answer).xpath("//a[@class='author-link']/@href"));
                 page.putField("username", new Html(answer).xpath("//a[@class='author-link']/text()"));
+                page.putField("answer", new Html(answer).xpath("//div[@class='zh-summary summary clearfix']/text()"));
                 page.putField("id",UUIDGenerator.genDBUUID());
                 exist = true;
             }
@@ -64,7 +65,7 @@ public class ZhihuSchedule extends QuartzJobBean implements PageProcessor {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		logger.info("start zhihu:" + new Date().toString());
 		
-		String query = "insert into data_questions(id, url, question, username, userid, vote, dealdate) values(:id, :url, :question, :username, :userid, :vote, now())";
+		String query = "insert into data_zhihu(id, url, question, username, userid, vote, answer, dealdate) values(:id, :url, :question, :username, :userid, :vote, :answer, now())";
 		String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
 		String startUrl = "http://www.zhihu.com/search?type=question&q=Áµ°®";
 		
