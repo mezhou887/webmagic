@@ -72,14 +72,9 @@
         <property name="mapperLocations" value="classpath:com/mezhou887/entity/*.xml"/> 
         <property name="typeAliasesPackage" value="com.mezhou887.entity" />
     </bean>
-	<bean id="quartzMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	    <property name="mapperInterface" value="com.mezhou887.quartz.dao.QuartzMapper" />  
-	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
-	</bean>  
-	<bean id="zhihuMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-	    <property name="mapperInterface" value="com.mezhou887.quartz.dao.ZhihuMapper" />  
-	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
-	</bean>  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+  		<property name="basePackage" value="com.mezhou887.quartz.dao" /> 
+	</bean> 
 	
 	<!-- Mail配置 -->
 	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

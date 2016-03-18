@@ -17,18 +17,18 @@ public class QuartzController {
 	@Autowired
 	private QuartzService quartzService;	
 	
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "index")
 	public String index(Model model) {
 		model.addAttribute("jobs", quartzService.getAllJobs());
 		return "index";
 	}
-	
-	@RequestMapping(value = "/toAdd")
+
+	@RequestMapping(value = "toAdd")
 	public String toAdd(Model model) {
 		return "add";
-	}	
+	}		
 	
-	@RequestMapping(value="/add")
+	@RequestMapping(value="add")
 	public @ResponseBody Boolean deploy(String jobName, String triggerName, String jobClassName, String cronExpression, Boolean listener) {
 		JobModel model = new JobModel();
 		model.setJobName(jobName);
@@ -43,25 +43,25 @@ public class QuartzController {
 		return quartzService.deploy(model);
 	}
 	
-	@RequestMapping(value="/remove")
+	@RequestMapping(value="remove")
 	public @ResponseBody Boolean unDeploy(String jobName, String jobGroup) {
 		JobKey jobKey = new JobKey(jobName, jobGroup);
 		return quartzService.unDeploy(jobKey);
 	}
 	
-	@RequestMapping(value="/pause")
+	@RequestMapping(value="pause")
 	public @ResponseBody Boolean pause(String jobName, String jobGroup) {
 		JobKey jobKey = new JobKey(jobName, jobGroup);
 		return quartzService.pause(jobKey);
 	}
 	
-	@RequestMapping(value="/resume")
+	@RequestMapping(value="resume")
 	public @ResponseBody Boolean resume(String jobName, String jobGroup) {
 		JobKey jobKey = new JobKey(jobName, jobGroup);
 		return quartzService.resume(jobKey);
 	}	
 	
-	@RequestMapping(value="/run")
+	@RequestMapping(value="run")
 	public @ResponseBody Boolean startNow(String jobName, String jobGroup) {
 		JobKey jobKey = new JobKey(jobName, jobGroup);
 		return quartzService.startNow(jobKey);
