@@ -19,7 +19,7 @@ public class MailSenderJobListener  extends JobListenerSupport {
 		String subject = "任务状态监控-邮件通知";
 		String message = context.getJobDetail().getJobDataMap().getString("message");
 		if(StringUtils.isBlank(message)) {
-			message = "no message context";
+			message = "没有消息正文";
 		}
 		sendMailUtil.sendCommonMail(subject, message);
 	}

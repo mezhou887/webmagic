@@ -67,7 +67,7 @@ public class ZhihuSchedule extends QuartzJobBean implements PageProcessor {
 		
 		String query = "insert into data_zhihu(id, url, question, username, userid, vote, answer, dealdate) values(:id, :url, :question, :username, :userid, :vote, :answer, now())";
 		String connStr = "jdbc:mysql://localhost:3306/quartz?useUnicode=true&characterEncoding=utf-8";
-		String startUrl = "http://www.zhihu.com/search?type=question&q=Áµ°®";
+		String startUrl = "http://www.zhihu.com/search?type=context&q=Áµ°®";
 		
 		Spider.create(new ZhihuSchedule()).addUrl(startUrl)
 		.setScheduler(new QueueScheduler())
